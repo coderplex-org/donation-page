@@ -1,0 +1,32 @@
+{
+  "name": "upipay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "v10.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zeit/next-css": "0.2.1-canary.4",
+    "clsx": "^1.0.4",
+    "is-mobile": "^2.0.1",
+    "next": "^9.0.2",
+    "qrcode.react": "^0.9.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.6.1",
+    "cssnano": "^4.1.10",
+    "next-purgecss": "^3.1.1",
+    "postcss-easy-import": "^3.0.0",
+    "tailwindcss": "^1.0.5"
+  }
+}
