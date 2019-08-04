@@ -1,32 +1,66 @@
 {
-  "name": "upipay",
+  "name": "donation-page",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Coderplex Foundation is a registered non-profit organization that is working towards improving the state of tech in India.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderplex/donation-page.git"
+  },
+  "bugs": {
+    "url": "https://github.com/coderplex/donation-page/issues"
+  },
+  "homepage": "https://github.com/coderplex/donation-page#readme",
+  "main": "pages/index.js",
   "engines": {
     "node": "v10.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next dev"
+    "dev": "now dev",
+    "format": "prettier --write './**/*.+(js|jsx|json|md)'"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@zeit/next-css": "0.2.1-canary.4",
+    "airtable": "^0.7.0",
     "clsx": "^1.0.4",
+    "cuid": "^2.1.6",
     "is-mobile": "^2.0.1",
     "next": "^9.0.2",
     "qrcode.react": "^0.9.3",
+    "razorpay": "^2.0.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "autoprefixer": "^9.6.1",
     "cssnano": "^4.1.10",
+    "husky": "^3.0.2",
+    "lint-staged": "^9.2.1",
     "next-purgecss": "^3.1.1",
     "postcss-easy-import": "^3.0.0",
+    "prettier": "^1.18.2",
     "tailwindcss": "^1.0.5"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.md": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

@@ -13,6 +13,7 @@ class MyDocument extends Document {
         <body className="bg-gray-100">
           <Main />
           <NextScript />
+          <script src="https://checkout.razorpay.com/v1/checkout.js" />
         </body>
       </Html>
     );

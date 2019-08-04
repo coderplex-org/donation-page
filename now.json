@@ -1,7 +1,22 @@
 {
   "version": 2,
   "public": true,
-  "name": "upipay",
+  "name": "donation-page",
+  "env": {
+    "RZP_LIVE_KEY": "@rzp_live_key",
+    "RZP_LIVE_SECRET": "@rzp_live_secret",
+    "RZP_TEST_KEY": "@rzp_test_key",
+    "RZP_TEST_SECRET": "@rzp_test_secret",
+    "AIRTABLE_KEY": "@airtable_key",
+    "AIRTABLE_BASE_ID": "@airtable_base_id",
+    "AIRTABLE_TABLE_NAME": "@airtable_table_name"
+  },
+  "build": {
+    "env": {
+      "RZP_LIVE_KEY": "@rzp_live_key",
+      "RZP_TEST_KEY": "@rzp_live_key"
+    }
+  },
   "builds": [
     {
       "src": "package.json",
@@ -19,5 +34,5 @@
       }
     }
   ],
-  "scope": "vinay"
+  "scope": "coderplex"
 }

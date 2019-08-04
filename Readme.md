@@ -1,6 +1,6 @@
-# UPI pay
+# Coderplex Donation Page
 
-Accept UPI payments without payment gateway
+Coderplex Foundation is a registered non-profit organization that is working towards improving the state of tech in India.
 
 ## Tech Stack
 
