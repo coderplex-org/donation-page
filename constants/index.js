@@ -2,8 +2,8 @@ export const CLOUDINARY_BASE = `https://res.cloudinary.com/coderplex/image/uploa
 export const LOGO_PUBLIC_ID = `website__assets/logo.png`;
 export const CODERPLEX_LOGO = `${CLOUDINARY_BASE}/${LOGO_PUBLIC_ID}`;
 export const DEFAULT_SEO_IMAGE = CODERPLEX_LOGO;
-export const DEFAULT_TITLE = `Coderplex Foundation`;
-export const DEFAULT_DESCRIPTION = `Coderplex Foundation is a registered non-profit organization that is working towards improving the state of tech in India.`;
+export const DEFAULT_TITLE = `Donate to Coderplex`;
+export const DEFAULT_DESCRIPTION = `Coderplex Foundation is a registered non-profit org on a mission to improve the state of tech in India.`;
 export const THEME_COLOR = `#d53f8c`;
 
 export const BASE_URL = `https://coderplex.org`;
