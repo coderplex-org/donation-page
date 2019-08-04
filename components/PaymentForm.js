@@ -97,6 +97,7 @@ function PaymentForm({ onClose = () => null }) {
               value={form.amount}
               onChange={onChange}
               required
+              autoFocus
               min="1"
               disabled={isSubmitting}
             />
