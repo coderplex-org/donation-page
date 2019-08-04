@@ -52,6 +52,7 @@ function PaymentForm({ onClose = () => null }) {
       await openRzp(form);
       setIsSubmitting(false);
       setFormValue(initialState);
+      onClose();
       toggleModal(true);
     } catch (error) {
       alert(error.message || `Some error occured try again!`);

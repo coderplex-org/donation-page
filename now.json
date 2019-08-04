@@ -2,7 +2,7 @@
   "version": 2,
   "public": true,
   "name": "donation-page",
-  "alias": ["coderplex-donate.now.sh"],
+  "alias": ["donate.coderplex.org"],
   "env": {
     "RZP_LIVE_KEY": "@rzp_live_key",
     "RZP_LIVE_SECRET": "@rzp_live_secret",

@@ -1,4 +1,6 @@
-export const CODERPLEX_LOGO = `https://res.cloudinary.com/coderplex/image/upload/c_scale,w_45/v1510788480/website__assets/logo.png`;
+export const CLOUDINARY_BASE = `https://res.cloudinary.com/coderplex/image/upload`;
+export const LOGO_PUBLIC_ID = `website__assets/logo.png`;
+export const CODERPLEX_LOGO = `${CLOUDINARY_BASE}/${LOGO_PUBLIC_ID}`;
 export const DEFAULT_SEO_IMAGE = CODERPLEX_LOGO;
 export const DEFAULT_TITLE = `Coderplex Foundation`;
 export const DEFAULT_DESCRIPTION = `Coderplex Foundation is a registered non-profit organization that is working towards improving the state of tech in India.`;

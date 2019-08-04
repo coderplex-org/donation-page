@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Head from 'next/head';
 
 import { DEFAULT_SEO_IMAGE, DEFAULT_TITLE, DEFAULT_DESCRIPTION, BASE_URL, THEME_COLOR } from '../constants';
+import Favicons from './Favicons';
 
 export default function SEO({
   lang = 'en',
@@ -60,6 +61,8 @@ export default function SEO({
     <Head>
       <html lang={lang} />
       <title>{title}</title>
+      <Favicons />
+      <link rel="manifest" href="/static/manifest/manifest.json" />
       {meta.map((item, i) => (
         <meta key={`meta-${i}`} {...item} />
       ))}
