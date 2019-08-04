@@ -52,7 +52,7 @@ function PaymentForm({ onClose = () => null }) {
       await openRzp(form);
       setIsSubmitting(false);
       setFormValue(initialState);
-      onClose();
+
       toggleModal(true);
     } catch (error) {
       alert(error.message || `Some error occured try again!`);
@@ -171,7 +171,7 @@ function PaymentForm({ onClose = () => null }) {
           </button>
         </div>
       </form>
-      <Modal title="Your payment is successfull" isOpen={isModalOpen} onClose={() => toggleModal(false)}>
+      <Modal title="Your payment is successfull" isOpen={isModalOpen} onClose={() => { toggleModal(false); onClose(); }}>
         <div className="w-full mb-4">
           <PaymentSuccess />
         </div>
