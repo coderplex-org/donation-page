@@ -15,6 +15,7 @@ import { Paragraph } from './Typography';
 import { saveUPIStatus } from '../services/upi';
 
 function PaymentForm({ onClose = () => null }) {
+  const PROCESSING_CHARGE_PERCENT = 2.36;
   const initialState = { amount: 100, email: '', phone: '' };
   const [form, setFormValue] = useState(initialState);
   const [url, setURL] = useState('');
@@ -49,7 +50,10 @@ function PaymentForm({ onClose = () => null }) {
         return alert(`Amount should be greater than or equal to 1`);
       }
       setIsSubmitting(true);
-      await openRzp(form);
+      await openRzp({
+        ...form,
+        amount: (Number(form.amount) * (1 + PROCESSING_CHARGE_PERCENT / 100)).toFixed(2),
+      });
       setIsSubmitting(false);
       setFormValue(initialState);
 
@@ -120,7 +124,7 @@ function PaymentForm({ onClose = () => null }) {
             />
           </div>
         </div>
-        <div className="mb-6">
+        <div className="mb-4">
           <label className="text-sm text-gray-500 mb-1 block" htmlFor="phone">
             Phone <sup className="text-red-500">*</sup>
           </label>
@@ -136,6 +140,11 @@ function PaymentForm({ onClose = () => null }) {
               disabled={isSubmitting}
             />
           </div>
+        </div>
+        <div className="mt-0 mb-6">
+          <span className="text-xs text-gray-500 mb-1 block">
+            <b>#</b>2.36% of the donation is charged as processing fee, if paid through Debit/Credit Cards
+          </span>
         </div>
         <div className="flex flex-col justify-center">
           <button
@@ -162,16 +171,24 @@ function PaymentForm({ onClose = () => null }) {
             {isSubmitting ? (
               <Loader />
             ) : (
-              <>
-                <IconCards width={27} height={22} />
-                <span className="md:ml-4 ml-2">Donate ₹ {Number(form.amount).toFixed(2)} using </span>
-                <strong className="ml-1">Debit/Credit cards</strong>
-              </>
-            )}
+                <>
+                  <IconCards width={27} height={22} />
+                  <span className="md:ml-4 ml-2">
+                    Donate ₹ {(Number(form.amount) * (1 + PROCESSING_CHARGE_PERCENT / 100)).toFixed(2)} using
+                </span>
+                  <strong className="ml-1">Debit/Credit cards</strong>
+                </>
+              )}
           </button>
         </div>
       </form>
-      <Modal title="Your payment is successfull" isOpen={isModalOpen} onClose={() => { toggleModal(false); onClose(); }}>
+      <Modal
+        title="Your payment is successfull"
+        isOpen={isModalOpen}
+        onClose={() => {
+          toggleModal(false);
+          onClose();
+        }}>
         <div className="w-full mb-4">
           <PaymentSuccess />
         </div>
