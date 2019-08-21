@@ -19,9 +19,11 @@ function PaymentForm({ onClose = () => null }) {
   const [url, setURL] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isModalOpen, toggleModal] = useState(false);
+  const [finalAmount, updateFinalAmount] = useState(getFinalAmount(form.amount));
   function onChange(e) {
     e.persist();
     setFormValue(form => ({ ...form, [e.target.name]: e.target.value }));
+    updateFinalAmount(getFinalAmount(e.target.value));
   }
   function onSubmit(e) {
     e.preventDefault();
@@ -50,7 +52,7 @@ function PaymentForm({ onClose = () => null }) {
       setIsSubmitting(true);
       await openRzp({
         ...form,
-        amount: getFinalAmount(amount),
+        amount: finalAmount,
       });
       setIsSubmitting(false);
       setFormValue(initialState);
@@ -165,14 +167,14 @@ function PaymentForm({ onClose = () => null }) {
             ) : (
               <>
                 <IconCards width={27} height={22} />
-                <span className="md:ml-4 ml-2">Donate ₹ {getFinalAmount(form.amount)} using</span>
+                <span className="md:ml-4 ml-2">Donate ₹ {finalAmount} using</span>
                 <strong className="ml-1">Debit/Credit cards</strong>
               </>
             )}
           </button>
         </div>
         <p className="m-2 text-xs text-gray-600 text-center">
-          <strong>*2.36%</strong> of the donation is charged as processing fee, if paid through Debit/Credit Cards
+          <strong>** 2.36%</strong> of the donation is charged as processing fee, if paid through Debit/Credit Cards
         </p>
       </form>
       <Modal
