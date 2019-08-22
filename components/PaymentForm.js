@@ -19,11 +19,10 @@ function PaymentForm({ onClose = () => null }) {
   const [url, setURL] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isModalOpen, toggleModal] = useState(false);
-  const [finalAmount, updateFinalAmount] = useState(getFinalAmount(form.amount));
+  const finalAmount = getFinalAmount(form.amount);
   function onChange(e) {
     e.persist();
     setFormValue(form => ({ ...form, [e.target.name]: e.target.value }));
-    updateFinalAmount(getFinalAmount(e.target.value));
   }
   function onSubmit(e) {
     e.preventDefault();
@@ -174,7 +173,7 @@ function PaymentForm({ onClose = () => null }) {
           </button>
         </div>
         <p className="m-2 text-xs text-gray-600 text-center">
-          <strong>** 2.36%</strong> of the donation is charged as processing fee, if paid through Debit/Credit Cards
+          <strong>** 2.36%</strong> is charged as processing fee for Debit/Credit Cards
         </p>
       </form>
       <Modal
