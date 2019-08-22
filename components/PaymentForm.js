@@ -9,9 +9,8 @@ import IconBack from './Icons/Back';
 import IconUPI from './Icons/UPI';
 import Loader from './Loader';
 import Modal from './Modal';
-import { getURL } from '../utils';
+import { getURL, getFinalAmount } from '../utils';
 import { openRzp } from '../services/rzp';
-import { Paragraph } from './Typography';
 import { saveUPIStatus } from '../services/upi';
 
 function PaymentForm({ onClose = () => null }) {
@@ -20,6 +19,7 @@ function PaymentForm({ onClose = () => null }) {
   const [url, setURL] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isModalOpen, toggleModal] = useState(false);
+  const finalAmount = getFinalAmount(form.amount);
   function onChange(e) {
     e.persist();
     setFormValue(form => ({ ...form, [e.target.name]: e.target.value }));
@@ -49,7 +49,10 @@ function PaymentForm({ onClose = () => null }) {
         return alert(`Amount should be greater than or equal to 1`);
       }
       setIsSubmitting(true);
-      await openRzp(form);
+      await openRzp({
+        ...form,
+        amount: finalAmount,
+      });
       setIsSubmitting(false);
       setFormValue(initialState);
 
@@ -147,8 +150,7 @@ function PaymentForm({ onClose = () => null }) {
               },
             ])}>
             <IconUPI width={21} height={24} />
-            <span className="ml-4">Donate ₹ {Number(form.amount).toFixed(2)} using</span>{' '}
-            <strong className="ml-1">UPI/QR</strong>
+            <span className="ml-4">Donate ₹ {form.amount} using</span> <strong className="ml-1">UPI/QR</strong>
           </button>
           <button
             type="button"
@@ -164,14 +166,23 @@ function PaymentForm({ onClose = () => null }) {
             ) : (
               <>
                 <IconCards width={27} height={22} />
-                <span className="md:ml-4 ml-2">Donate ₹ {Number(form.amount).toFixed(2)} using </span>
+                <span className="md:ml-4 ml-2">Donate ₹ {finalAmount} using</span>
                 <strong className="ml-1">Debit/Credit cards</strong>
               </>
             )}
           </button>
         </div>
+        <p className="m-2 text-xs text-gray-600 text-center">
+          <strong>** 2.36%</strong> is charged as processing fee for Debit/Credit Cards
+        </p>
       </form>
-      <Modal title="Your payment is successfull" isOpen={isModalOpen} onClose={() => { toggleModal(false); onClose(); }}>
+      <Modal
+        title="Your payment is successfull"
+        isOpen={isModalOpen}
+        onClose={() => {
+          toggleModal(false);
+          onClose();
+        }}>
         <div className="w-full mb-4">
           <PaymentSuccess />
         </div>
