@@ -20,6 +20,16 @@
         "doc",
         "design"
       ]
+    },
+    {
+      "login": "krushiraj",
+      "name": "Krushi Raj Tula",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/19507241?v=4",
+      "profile": "http://krushiraj.github.io",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
