@@ -1,6 +1,6 @@
 {
   "projectName": "donation-page",
-  "projectOwner": "vinaypuppal",
+  "projectOwner": "coderplex",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -8,29 +8,7 @@
   ],
   "imageSize": 100,
   "commit": true,
-  "commitConvention": "none",
-  "contributors": [
-    {
-      "login": "vinaypuppal",
-      "name": "vínαч puppαl",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/8843216?v=4",
-      "profile": "https://www.vinaypuppal.com/",
-      "contributions": [
-        "code",
-        "doc",
-        "design"
-      ]
-    },
-    {
-      "login": "krushiraj",
-      "name": "Krushi Raj Tula",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/19507241?v=4",
-      "profile": "http://krushiraj.github.io",
-      "contributions": [
-        "code",
-        "doc"
-      ]
-    }
-  ],
+  "commitConvention": "eslint",
+  "contributors": [],
   "contributorsPerLine": 7
 }
