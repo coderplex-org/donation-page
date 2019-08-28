@@ -9,6 +9,10 @@ Coderplex Foundation is a registered non-profit organization that is working tow
 - next.js
 - tailwindcss
 
+## Contributing to this project
+
+Everyone is welcome to contribute to this project. Please read the [CONTRIBUTING](https://github.com/coderplex/donation-page/blob/master/docs/CONTRIBUTING.md) document to see how you can set-up and contribute to the project.
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):

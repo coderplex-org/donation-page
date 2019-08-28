@@ -17,6 +17,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "now dev",
+    "add-contributor": "all-contributors add",
     "format": "prettier --write './**/*.+(js|jsx|json|md)'"
   },
   "keywords": [],
@@ -35,12 +36,13 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "all-contributors-cli": "^6.8.1",
     "autoprefixer": "^9.6.1",
     "cssnano": "^4.1.10",
     "husky": "^3.0.2",
     "lint-staged": "^9.2.1",
-    "next-purgecss": "^3.1.1",
     "next-manifest": "^2.0.0",
+    "next-purgecss": "^3.1.1",
     "postcss-easy-import": "^3.0.0",
     "prettier": "^1.18.2",
     "tailwindcss": "^1.0.5"
