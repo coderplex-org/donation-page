@@ -63,7 +63,7 @@ export default class CrowdfundDetail extends React.Component {
                     onSuccess={data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)}
                   />
                 ) : (
-                  <ErrorComponent />
+                  error && <ErrorComponent />
                 )}
               </div>
               <div className="shadow bg-white p-4 m-4 mt-6 rounded-lg">
