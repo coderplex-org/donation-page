@@ -48,7 +48,7 @@ export default class CrowdfundDetail extends React.Component {
     }
     return (
       <>
-        <SEO title={`Contribute to ${campaign.title} by Coderplex`} />
+        <SEO title={campaign ? `Crowdfundind by Coderplex` : `Contribute to ${campaign.title} by Coderplex`} />
         <Header title="Coderplex Crowdfunding" />
         <Container className="max-w-6xl">
           <Container className="flex-col md:w-2/3">
