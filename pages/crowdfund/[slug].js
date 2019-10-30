@@ -5,10 +5,10 @@ import MobileFooter from '../../components/Footer';
 import SEO from '../../components/SEO';
 import { Header, Section, Container } from '../../components/Layout';
 import CampaignDetails from '../../components/CampaignDetails';
-import { fetchRecords } from '../../services/crowdfund';
+import { fetchRecords, insertRecord } from '../../services/crowdfund';
 import { CAMPAIGNS_ROUTE, FUNDINGS_ROUTE } from '../../constants';
 import FundingsList from '../../components/FundingsList';
-import { Loading } from '../../components/common';
+import { Loading, ErrorComponent } from '../../components/common';
 
 export default class CrowdfundDetail extends React.Component {
   state = {
@@ -25,12 +25,12 @@ export default class CrowdfundDetail extends React.Component {
     const { campaign } = await fetchRecords(CAMPAIGNS_ROUTE, this.props.slug)
     if  (campaign) {
       const { fundings } = await fetchRecords(FUNDINGS_ROUTE, this.props.slug);
-      if (fundings.length !== 0) {
+      if (fundings !== 0) {
         const sum = fundings.reduce((sumSoFar, { amount }) => sumSoFar + amount, 0);
         this.setState({ campaign, fundings, loading: false, error: false, raised: sum });
       } else {
-        console.error(new Error(`There was a problem fetching fundings with slug: ${this.props.slug}`));
-        this.setState({ fundings: [], loading: false, error: true, raised: 0 });
+        console.error(`There are no fundings raised for campaign with slug: ${this.props.slug}`);
+        this.setState({ fundings: [], loading: false, error: false, raised: 0 });
       }
     } else {
       console.error(new Error(`There was a problem fetching campaign with slug: ${this.props.slug}`));
@@ -55,14 +55,25 @@ export default class CrowdfundDetail extends React.Component {
           <Container className="flex-col md:w-1/3">
             <Section className="md:flex-1 hidden md:block">
               <div className="shadow bg-white p-4 m-4 mt-6 rounded-lg">
-                {raised && campaign.req_amount && !error ? (
-                  <PaymentForm maxAmount={campaign.req_amount - raised} />
-                ) : (
+                {loading ? (
                   <Loading />
+                ) : campaign.req_amount ? (
+                  <PaymentForm
+                    maxAmount={campaign.req_amount - raised}
+                    onSuccess={data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)}
+                  />
+                ) : (
+                  <ErrorComponent />
                 )}
               </div>
               <div className="shadow bg-white p-4 m-4 mt-6 rounded-lg">
-                {fundings.length !== 0 && !error ? <FundingsList fundings={fundings} /> : <Loading />}
+                {loading ? (
+                  <Loading />
+                ) : !error ? (
+                  <FundingsList fundings={fundings} />
+                ) : (
+                  <ErrorComponent />
+                )}
               </div>
             </Section>
           </Container>

@@ -13,9 +13,13 @@ async function getFundings(slug, res) {
           console.error(err);
           res.send({ error: true, message: err.message });
         }
-        records = records = records
-          .map(({ _rawJson: { id, createdTime, fields } }) => ({ id, createdTime, ...fields }))
-          .filter(record => record.funding_slug === slug);
+        records = records
+          .map(({ _rawJson: { id, createdTime, fields } }) => ({
+            id,
+            createdTime,
+            ...fields,
+          }))
+          .filter(record => record.campaign_slug === slug);
         result = result.concat(records);
         nextPage();
       },
@@ -35,8 +39,9 @@ async function postFunding(fields, res) {
     if (err) {
       console.error(err);
       res.send({ error: true, message: err });
+      return;
     }
-    res.send({ created: records[0] });
+    res.send({ created: records });
   });
 }
 
@@ -47,7 +52,7 @@ export default async function handler(req, res) {
         getFundings(req.query.slug, res);
         break;
       case 'POST':
-        postFunding(res);
+        postFunding(req.body, res);
         break;
       default:
         res.send({ error: `${req.method} operation not allowed` });

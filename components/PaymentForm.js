@@ -13,9 +13,14 @@ import { getURL, getFinalAmount } from '../utils';
 import { openRzp } from '../services/rzp';
 import { saveUPIStatus } from '../services/upi';
 
-function PaymentForm({ onClose = () => null, maxAmount = Number.MAX_SAFE_INTEGER }) {
+function PaymentForm({
+  onClose = () => null,
+  onSuccess = () => null,
+  collectName = false,
+  maxAmount = Number.MAX_SAFE_INTEGER,
+}) {
   const amount = 100 > maxAmount ? maxAmount : 100;
-  const initialState = { amount, email: '', phone: '' };
+  const initialState = { amount, email: '', phone: '', name: '' };
   const [form, setFormValue] = useState(initialState);
   const [url, setURL] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,8 +51,8 @@ function PaymentForm({ onClose = () => null, maxAmount = Number.MAX_SAFE_INTEGER
   }
   async function onRzpSubmit() {
     try {
-      const { amount, email, phone } = form;
-      if (!amount || !email || !phone) {
+      const { amount, email, phone, name } = form;
+      if (!amount || !email || !phone || (!name && collectName)) {
         return alert(`Please enter all required fields`);
       }
       if (Number(amount) < 1) {
@@ -58,6 +63,7 @@ function PaymentForm({ onClose = () => null, maxAmount = Number.MAX_SAFE_INTEGER
         ...form,
         amount: finalAmount,
       });
+      onSuccess({ ...form, amount: finalAmount });
       setIsSubmitting(false);
       setFormValue(initialState);
 
@@ -111,6 +117,25 @@ function PaymentForm({ onClose = () => null, maxAmount = Number.MAX_SAFE_INTEGER
             />
           </div>
         </div>
+        {collectName && (
+          <div className="mb-4">
+            <label className="text-sm text-gray-500 mb-1 block" htmlFor="name">
+              Name <sup className="text-red-500">*</sup>
+            </label>
+            <div>
+              <input
+                className="bg-white focus:outline-0 border border-gray-300 rounded py-2 px-2 block w-full appearance-none leading-normal"
+                type="text"
+                name="name"
+                id="name"
+                value={form.name}
+                onChange={onChange}
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        )}
         <div className="mb-4">
           <label className="text-sm text-gray-500 mb-1 block" htmlFor="email">
             Email <sup className="text-red-500">*</sup>

@@ -19,7 +19,7 @@ export default function(props) {
       ) : (
         <>
           <H1 className="mt-4">{title}</H1>
-          {req_amount && raised && (
+          {req_amount && (
             <div className="flex flex-col">
               <H2>Fundings raised: </H2>
               <div className="w-100 border rounded border-pink-700 my-2 mx-4 pt-1 pb-1 h-6">
