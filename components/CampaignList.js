@@ -3,6 +3,7 @@ import React from 'react';
 import { fetchRecords } from '../services/crowdfund';
 import CampaignItem from './CampaignItem';
 import { CAMPAIGNS_ROUTE } from '../constants';
+import { Loading, ErrorComponent } from '../components/common';
 
 export default class CampaignList extends React.Component {
   state = {

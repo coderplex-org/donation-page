@@ -8,6 +8,7 @@ import CampaignDetails from '../../components/CampaignDetails';
 import { fetchRecords } from '../../services/crowdfund';
 import { CAMPAIGNS_ROUTE, FUNDINGS_ROUTE } from '../../constants';
 import FundingsList from '../../components/FundingsList';
+import { Loading } from '../../components/common';
 
 export default class CrowdfundDetail extends React.Component {
   state = {
@@ -54,10 +55,14 @@ export default class CrowdfundDetail extends React.Component {
           <Container className="flex-col md:w-1/3">
             <Section className="md:flex-1 hidden md:block">
               <div className="shadow bg-white p-4 m-4 mt-6 rounded-lg">
-                {raised && campaign.req_amount ? <PaymentForm maxAmount={campaign.req_amount - raised} /> : <></>}
+                {raised && campaign.req_amount && !error ? (
+                  <PaymentForm maxAmount={campaign.req_amount - raised} />
+                ) : (
+                  <Loading />
+                )}
               </div>
               <div className="shadow bg-white p-4 m-4 mt-6 rounded-lg">
-                {fundings.length !== 0 ? <FundingsList fundings={fundings} /> : <></>}
+                {fundings.length !== 0 && !error ? <FundingsList fundings={fundings} /> : <Loading />}
               </div>
             </Section>
           </Container>
