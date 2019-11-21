@@ -13,8 +13,9 @@ import { getURL, getFinalAmount } from '../utils';
 import { openRzp } from '../services/rzp';
 import { saveUPIStatus } from '../services/upi';
 
-function PaymentForm({ onClose = () => null }) {
-  const initialState = { amount: 100, email: '', phone: '' };
+function PaymentForm({ onClose = () => null, maxAmount = Number.MAX_SAFE_INTEGER }) {
+  const amount = 100 > maxAmount ? maxAmount : 100;
+  const initialState = { amount, email: '', phone: '' };
   const [form, setFormValue] = useState(initialState);
   const [url, setURL] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,7 +23,11 @@ function PaymentForm({ onClose = () => null }) {
   const finalAmount = getFinalAmount(form.amount);
   function onChange(e) {
     e.persist();
-    setFormValue(form => ({ ...form, [e.target.name]: e.target.value }));
+    let value = e.target.value;
+    if (e.target.name === 'amount') {
+      value = value < maxAmount ? value : maxAmount;
+    }
+    setFormValue(form => ({ ...form, [e.target.name]: value }));
   }
   function onSubmit(e) {
     e.preventDefault();

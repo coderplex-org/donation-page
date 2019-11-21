@@ -9,7 +9,6 @@ import { Header, Section, Container } from '../components/Layout';
 import { H1, H2, Paragraph } from '../components/Typography';
 
 export default function Index() {
-  const isMobileBrowser = isMobile();
   return (
     <>
       <SEO />

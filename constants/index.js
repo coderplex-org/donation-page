@@ -14,4 +14,7 @@ export const PHONE = `+91-8125371202`;
 
 export const PROCESSING_CHARGE_PERCENT = 2.36;
 
+export const CAMPAIGNS_ROUTE = 'campaigns';
+export const FUNDINGS_ROUTE = 'fundings';
+
 export const RZP_KEY = process.env.NODE_ENV === 'development' ? process.env.RZP_TEST_KEY : process.env.RZP_LIVE_KEY;
