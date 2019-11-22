@@ -7,6 +7,9 @@ export function fetchRecords(table, slug) {
 export function insertRecord(table, slug, data) {
   return fetch(`/api/${table}`, {
     method: 'POST',
-    body: JSON.stringify({ ...data, slug: slug }),
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({ ...data, campaign_slug: slug }),
   }).then(res => res.json());
 }

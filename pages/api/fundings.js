@@ -35,7 +35,7 @@ async function getFundings(slug, res) {
 }
 
 async function postFunding(fields, res) {
-  fundingsBase.create([{ fields }], function(err, records) {
+  fundingsBase.create([{ fields: { ...fields, amount: Number.parseFloat(fields.amount) } }], function(err, records) {
     if (err) {
       console.error(err);
       res.send({ error: true, message: err });

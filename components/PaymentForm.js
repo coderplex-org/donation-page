@@ -64,8 +64,7 @@ function PaymentForm({
         ...form,
         amount: finalAmount,
         category: actionName.toLowerCase,
-      });
-      onSuccess({ ...form, amount: finalAmount });
+      }).then(() => onSuccess({ ...form }));
       setIsSubmitting(false);
       setFormValue(initialState);
 

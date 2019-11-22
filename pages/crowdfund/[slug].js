@@ -62,7 +62,7 @@ export default class CrowdfundDetail extends React.Component {
                     maxAmount={campaign.req_amount - raised}
                     actionName="Contribute"
                     collectName={true}
-                    onSuccess={data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)}
+                    onSuccess={async data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)}
                   />
                 ) : (
                   error && <ErrorComponent />
