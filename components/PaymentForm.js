@@ -18,6 +18,7 @@ function PaymentForm({
   onSuccess = () => null,
   collectName = false,
   maxAmount = Number.MAX_SAFE_INTEGER,
+  actionName = 'Donate',
 }) {
   const amount = 100 > maxAmount ? maxAmount : 100;
   const initialState = { amount, email: '', phone: '', name: '' };
@@ -180,7 +181,10 @@ function PaymentForm({
               },
             ])}>
             <IconUPI width={21} height={24} />
-            <span className="ml-4">Donate ₹ {form.amount} using</span> <strong className="ml-1">UPI/QR</strong>
+            <span className="ml-4">
+              {actionName} ₹ {form.amount} using
+            </span>{' '}
+            <strong className="ml-1">UPI</strong>
           </button>
           <button
             type="button"
@@ -196,7 +200,9 @@ function PaymentForm({
             ) : (
               <>
                 <IconCards width={27} height={22} />
-                <span className="md:ml-4 ml-2">Donate ₹ {finalAmount} using</span>
+                <span className="md:ml-4 ml-2">
+                  {actionName} ₹ {finalAmount} using
+                </span>
                 <strong className="ml-1">Debit/Credit cards</strong>
               </>
             )}
@@ -216,7 +222,9 @@ function PaymentForm({
         <div className="w-full mb-4">
           <PaymentSuccess />
         </div>
-        <p className="text-center py-1 font-semibold text-xl text-pink-600">Thanks for your donation.</p>
+        <p className="text-center py-1 font-semibold text-xl text-pink-600">
+          Thanks for your {actionName === 'Donate' ? 'donation' : 'contribution'}.
+        </p>
         <p className="text-center text-sm text-gray-600">We truly appreciate your generosity :D</p>
       </Modal>
     </>

@@ -43,7 +43,7 @@ export default class CrowdfundDetail extends React.Component {
     return (
       <>
         <SEO />
-        <Header title="Coderplex Crowd-funding" />
+        <Header title="Coderplex Crowdfunding" />
         <Container className="max-w-6xl">
           <Container className="flex-col md:w-2/3">
             <Section className="py-4 md:w-100 md:flex-1">
@@ -60,6 +60,7 @@ export default class CrowdfundDetail extends React.Component {
                 ) : campaign.req_amount ? (
                   <PaymentForm
                     maxAmount={campaign.req_amount - raised}
+                    actionName="Contribute"
                     onSuccess={data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)}
                   />
                 ) : (

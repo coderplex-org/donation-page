@@ -12,7 +12,9 @@ const Funding = ({ name, amount }) => (
 export default function({ fundings }) {
   return (
     <div className="flex flex-col">
-      <Paragraph className="mx-0 px-0">A special thanks to all who raised the funds for this campaign.</Paragraph>
+      <Paragraph className="mx-0 px-0 font-medium">
+        A special thanks to all who raised the funds for this campaign.
+      </Paragraph>
       <div className="h-64 relative">
         <div className="max-h-full overflow-auto">
           {fundings.length !== 0 ? (
