@@ -1,7 +1,7 @@
 import { RZP_KEY, DEFAULT_TITLE, DEFAULT_DESCRIPTION, CODERPLEX_LOGO, THEME_COLOR } from '../constants';
 
 async function getOrderId(data) {
-  return fetch(`/api/rzp`, {
+  return fetch(`/api/rzp${data.donate ? `?donate=true` : ``}`, {
     method: 'post',
     headers: {
       'content-type': 'application/json',

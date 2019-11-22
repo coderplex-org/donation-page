@@ -63,6 +63,7 @@ function PaymentForm({
       await openRzp({
         ...form,
         amount: finalAmount,
+        category: actionName.toLowerCase,
       });
       onSuccess({ ...form, amount: finalAmount });
       setIsSubmitting(false);
