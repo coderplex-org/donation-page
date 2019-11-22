@@ -14,16 +14,16 @@ export default class CrowdfundDetail extends React.Component {
   state = {
     campaign: {},
     fundings: [],
-    raised: 0
-  }
+    raised: 0,
+  };
 
   static getInitialProps({ query }) {
-    return query
+    return query;
   }
 
   async componentDidMount() {
-    const { campaign } = await fetchRecords(CAMPAIGNS_ROUTE, this.props.slug)
-    if  (campaign) {
+    const { campaign } = await fetchRecords(CAMPAIGNS_ROUTE, this.props.slug);
+    if (campaign) {
       const { fundings } = await fetchRecords(FUNDINGS_ROUTE, this.props.slug);
       if (fundings !== 0) {
         const sum = fundings.reduce((sumSoFar, { amount }) => sumSoFar + amount, 0);
@@ -34,12 +34,12 @@ export default class CrowdfundDetail extends React.Component {
       }
     } else {
       console.error(new Error(`There was a problem fetching campaign with slug: ${this.props.slug}`));
-      this.setState({ campaign: {}, loading: false, error: true })
+      this.setState({ campaign: {}, loading: false, error: true });
     }
   }
 
   render() {
-    const { campaign, raised, loading, error, fundings } = this.state
+    const { campaign, raised, loading, error, fundings } = this.state;
     return (
       <>
         <SEO />
@@ -61,6 +61,7 @@ export default class CrowdfundDetail extends React.Component {
                   <PaymentForm
                     maxAmount={campaign.req_amount - raised}
                     actionName="Contribute"
+                    collectName={true}
                     onSuccess={data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)}
                   />
                 ) : (
@@ -68,13 +69,7 @@ export default class CrowdfundDetail extends React.Component {
                 )}
               </div>
               <div className="shadow bg-white p-4 m-4 mt-6 rounded-lg">
-                {loading ? (
-                  <Loading />
-                ) : !error ? (
-                  <FundingsList fundings={fundings} />
-                ) : (
-                  <ErrorComponent />
-                )}
+                {loading ? <Loading /> : !error ? <FundingsList fundings={fundings} /> : <ErrorComponent />}
               </div>
             </Section>
           </Container>
