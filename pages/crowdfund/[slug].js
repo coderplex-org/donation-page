@@ -40,30 +40,29 @@ export default class CrowdfundDetail extends React.Component {
 
   render() {
     const { campaign, raised, loading, error, fundings } = this.state;
+    const paymentFormProps = {
+      maxAmount: campaign.req_amount - raised,
+      actionName: "Contribute",
+      collectName: true,
+      onSuccess: async data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)
+    }
     return (
       <>
-        <SEO />
+        <SEO title={`Contribute to ${campaign.title} by Coderplex`} />
         <Header title="Coderplex Crowdfunding" />
         <Container className="max-w-6xl">
           <Container className="flex-col md:w-2/3">
             <Section className="py-4 md:w-100 md:flex-1">
               <CampaignDetails campaign={campaign} raised={raised} loading={loading} error={error} />
-              <FindUs />
-              <ContactUs />
             </Section>
           </Container>
           <Container className="flex-col md:w-1/3">
-            <Section className="md:flex-1 hidden md:block">
-              <div className="shadow bg-white p-4 m-4 mt-6 rounded-lg">
+            <Section className="md:flex-1 md:block">
+              <div className="shadow md:flex-1 hidden md:block bg-white p-4 m-4 mt-6 rounded-lg">
                 {loading ? (
                   <Loading />
                 ) : campaign.req_amount ? (
-                  <PaymentForm
-                    maxAmount={campaign.req_amount - raised}
-                    actionName="Contribute"
-                    collectName={true}
-                    onSuccess={async data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)}
-                  />
+                  <PaymentForm {...paymentFormProps} />
                 ) : (
                   error && <ErrorComponent />
                 )}
@@ -74,7 +73,11 @@ export default class CrowdfundDetail extends React.Component {
             </Section>
           </Container>
         </Container>
-        <MobileFooter />
+        <Container>
+          <FindUs />
+          <ContactUs />
+        </Container>
+        <MobileFooter paymentFormProps={paymentFormProps} />
       </>
     );
   }

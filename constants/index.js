@@ -8,6 +8,7 @@ export const THEME_COLOR = `#d53f8c`;
 
 export const BASE_URL = `https://coderplex.org`;
 export const MEETUP_URL = `https://meetup.com/coderplex`;
+export const CROWDFUND_URL = `https://donate.coderplex.org/crowdfund`;
 export const CHAT_URL = `${BASE_URL}/chat`;
 export const EMAIL = `support@coderplex.org`;
 export const PHONE = `+91-8125371202`;

@@ -1,5 +1,3 @@
-import isMobile from 'is-mobile';
-
 import FindUs from '../components/FindUs';
 import ContactUs from '../components/ContactUs';
 import PaymentForm from '../components/PaymentForm';

@@ -28,8 +28,8 @@ export default function(props) {
                   className="mx-1 bg-pink-400 h-4 p-0 border rounded"></div>
               </div>
               <div className="w-100 text-right text-base mr-4">
-                <span className="text-gray-600">₹ {raised}/</span>
-                <span className="text-pink-500">{req_amount}</span>
+                <span className="text-gray-600">₹ {raised} / </span>
+                <span className="text-pink-500">₹ {req_amount}</span>
               </div>
             </div>
           )}

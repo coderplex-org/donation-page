@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import PaymentForm from './PaymentForm';
 
-function MobileFooter() {
+function MobileFooter({ paymentFormProps }) {
   const [showPayModal, togglePayModal] = useState(false);
   return (
     <footer
@@ -15,14 +15,14 @@ function MobileFooter() {
         className={clsx(['bg-white w-0 h-0'], {
           'w-full h-auto py-4 px-4': showPayModal,
         })}>
-        {showPayModal && <PaymentForm onClose={() => togglePayModal(false)} />}
+        {showPayModal && <PaymentForm {...paymentFormProps} onClose={() => togglePayModal(false)} />}
       </div>
       <button
         onClick={() => togglePayModal(true)}
         className={clsx(['w-full h-12 text-center font-semibold text-white'], {
           hidden: showPayModal,
         })}>
-        ⚡ Proceed to Donate
+        ⚡ Proceed to {(paymentFormProps && paymentFormProps.actionName) || 'Donate'}
       </button>
     </footer>
   );
