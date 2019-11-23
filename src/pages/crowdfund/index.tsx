@@ -1,6 +1,6 @@
-import FindUs from '../../components/FindUs';
-import ContactUs from '../../components/ContactUs';
-import SEO from '../../components/SEO';
+import { FindUs } from '../../components/FindUs';
+import { ContactUs } from '../../components/ContactUs';
+import { SEO } from '../../components/SEO';
 import { Header, Section, Container } from '../../components/Layout';
 import { H1 } from '../../components/Typography';
 import CampaignList from '../../components/CampaignList';

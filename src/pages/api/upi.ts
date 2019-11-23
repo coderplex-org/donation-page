@@ -1,8 +1,8 @@
-import { getURL } from '../../utils';
+import { getUPIUrl } from '../../utils';
 
 export default (req, res) => {
   try {
-    const url = getURL(req.query);
+    const url = getUPIUrl(req.query);
     res.writeHead(302, {
       Location: url,
     });

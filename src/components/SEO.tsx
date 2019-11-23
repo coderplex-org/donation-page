@@ -1,16 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, FunctionComponent } from 'react';
 import Head from 'next/head';
 
 import { DEFAULT_SEO_IMAGE, DEFAULT_TITLE, DEFAULT_DESCRIPTION, BASE_URL, THEME_COLOR } from '../constants';
-import Favicons from './Favicons';
+import { Favicons } from './Favicons';
 
-export default function SEO({
+interface Props {
+  lang?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+}
+
+export const SEO: FunctionComponent<Props> = ({
   lang = 'en',
   title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
   image = DEFAULT_SEO_IMAGE,
   url = `${BASE_URL}/donate`,
-}) {
+}) => {
   const meta = [
     {
       name: 'viewport',
@@ -68,4 +76,4 @@ export default function SEO({
       ))}
     </Head>
   );
-}
+};

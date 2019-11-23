@@ -1,4 +1,4 @@
-export async function saveUPIStatus(data) {
+export async function saveUPIStatus(data: object) {
   return fetch(`/api/upi-status`, {
     method: 'post',
     headers: {

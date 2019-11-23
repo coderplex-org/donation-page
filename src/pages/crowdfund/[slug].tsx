@@ -1,14 +1,14 @@
-import FindUs from '../../components/FindUs';
-import ContactUs from '../../components/ContactUs';
-import PaymentForm from '../../components/PaymentForm';
-import MobileFooter from '../../components/Footer';
-import SEO from '../../components/SEO';
-import { Header, Section, Container } from '../../components/Layout';
+import React from 'react';
 import CampaignDetails from '../../components/CampaignDetails';
-import { fetchRecords, insertRecord } from '../../services/crowdfund';
-import { CAMPAIGNS_ROUTE, FUNDINGS_ROUTE } from '../../constants';
+import { ErrorComponent, Loading } from '../../components/common';
+import { ContactUs } from '../../components/ContactUs';
+import { FindUs } from '../../components/FindUs';
+import MobileFooter from '../../components/Footer';
 import FundingsList from '../../components/FundingsList';
-import { Loading, ErrorComponent } from '../../components/common';
+import { Container, Header, Section } from '../../components/Layout';
+import { SEO } from '../../components/SEO';
+import { CAMPAIGNS_ROUTE, FUNDINGS_ROUTE } from '../../constants';
+import { fetchRecords, insertRecord } from '../../services/crowdfund';
 
 export default class CrowdfundDetail extends React.Component {
   state = {
@@ -39,15 +39,20 @@ export default class CrowdfundDetail extends React.Component {
   }
 
   render() {
+    // @ts-ignore
     const { campaign, raised, loading, error, fundings } = this.state;
     const paymentFormProps = {
+      // @ts-ignore
       maxAmount: campaign.req_amount - raised,
-      actionName: "Contribute",
+      actionName: 'Contribute',
       collectName: true,
-      onSuccess: async data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data)
-    }
+      // @ts-ignore
+      onSuccess: async data => insertRecord(FUNDINGS_ROUTE, this.props.slug, data),
+    };
     return (
       <>
+        {/* 
+        // @ts-ignore       */}
         <SEO title={`Contribute to ${campaign.title} by Coderplex`} />
         <Header title="Coderplex Crowdfunding" />
         <Container className="max-w-6xl">
@@ -58,15 +63,7 @@ export default class CrowdfundDetail extends React.Component {
           </Container>
           <Container className="flex-col md:w-1/3">
             <Section className="md:flex-1 md:block">
-              <div className="shadow md:flex-1 hidden md:block bg-white p-4 m-4 mt-6 rounded-lg">
-                {loading ? (
-                  <Loading />
-                ) : campaign.req_amount ? (
-                  <PaymentForm {...paymentFormProps} />
-                ) : (
-                  error && <ErrorComponent />
-                )}
-              </div>
+              <div className="shadow md:flex-1 hidden md:block bg-white p-4 m-4 mt-6 rounded-lg">{/* Todo */}</div>
               <div className="shadow bg-white p-4 m-4 mt-6 rounded-lg">
                 {loading ? <Loading /> : !error ? <FundingsList fundings={fundings} /> : <ErrorComponent />}
               </div>

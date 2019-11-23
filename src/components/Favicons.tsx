@@ -1,8 +1,7 @@
 import React from 'react';
-
 import { CLOUDINARY_BASE, LOGO_PUBLIC_ID } from '../constants';
 
-export default function Favicons() {
+export function Favicons() {
   const icons = getIcons();
   return (
     <>
@@ -13,7 +12,7 @@ export default function Favicons() {
   );
 }
 
-export const getIconUrl = size => {
+export const getIconUrl = (size: number) => {
   return `${CLOUDINARY_BASE}/c_scale,w_${size}/${LOGO_PUBLIC_ID}`;
 };
 

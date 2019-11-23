@@ -9,7 +9,7 @@ import IconBack from './Icons/Back';
 import IconUPI from './Icons/UPI';
 import Loader from './Loader';
 import Modal from './Modal';
-import { getURL, getFinalAmount } from '../utils';
+import { getUPIUrl, getFinalAmount } from '../utils';
 import { openRzp } from '../services/rzp';
 import { saveUPIStatus } from '../services/upi';
 
@@ -39,7 +39,8 @@ function PaymentForm({
     e.preventDefault();
     const { amount, email, phone } = form;
     saveUPIStatus(form);
-    const url = getURL({ amount, email });
+    const url = getUPIUrl({ amount, email });
+    // @ts-ignore
     if (!isMobile()) {
       return setURL(`${window.origin}/api/upi?amount=${amount}&email=${email}`);
     }
@@ -64,6 +65,7 @@ function PaymentForm({
         ...form,
         amount: finalAmount,
         category: actionName.toLowerCase,
+        // @ts-ignore
       }).then(() => onSuccess({ ...form }));
       setIsSubmitting(false);
       setFormValue(initialState);

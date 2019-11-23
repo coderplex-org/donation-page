@@ -1,8 +1,8 @@
-import FindUs from '../components/FindUs';
-import ContactUs from '../components/ContactUs';
+import { FindUs } from '../components/FindUs';
+import { ContactUs } from '../components/ContactUs';
 import PaymentForm from '../components/PaymentForm';
 import MobileFooter from '../components/Footer';
-import SEO from '../components/SEO';
+import { SEO } from '../components/SEO';
 import { Header, Section, Container } from '../components/Layout';
 import { H1, H2, Paragraph } from '../components/Typography';
 
@@ -42,6 +42,8 @@ export default function Index() {
           </div>
         </Section>
       </Container>
+      {/* 
+        // @ts-ignore       */}
       <MobileFooter />
     </>
   );

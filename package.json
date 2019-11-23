@@ -10,7 +10,7 @@
     "url": "https://github.com/coderplex/donation-page/issues"
   },
   "homepage": "https://github.com/coderplex/donation-page#readme",
-  "main": "pages/index.js",
+  "main": "src/pages/index.ts",
   "engines": {
     "node": "v10.x"
   },
@@ -18,12 +18,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "now dev",
     "add-contributor": "all-contributors add",
-    "format": "prettier --write './**/*.+(js|jsx|json|md)'"
+    "format": "prettier --write './**/*.+(ts|tsx|css|json|js|jsx|json|md)'"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@types/airtable": "^0.5.6",
     "@zeit/next-css": "0.2.1-canary.4",
     "airtable": "^0.7.0",
     "clsx": "^1.0.4",
@@ -36,6 +37,9 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "@types/node": "^12.12.12",
+    "@types/react": "^16.9.12",
+    "@types/react-dom": "^16.9.4",
     "all-contributors-cli": "^6.8.1",
     "autoprefixer": "^9.6.1",
     "cssnano": "^4.1.10",
@@ -45,14 +49,11 @@
     "next-purgecss": "^3.1.1",
     "postcss-easy-import": "^3.0.0",
     "prettier": "^1.18.2",
-    "tailwindcss": "^1.0.5"
+    "tailwindcss": "^1.0.5",
+    "typescript": "^3.7.2"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.json": [
+    "*.{js,ts,tsx,jsx,json,css}": [
       "prettier --write",
       "git add"
     ],

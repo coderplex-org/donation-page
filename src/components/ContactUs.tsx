@@ -3,7 +3,7 @@ import React from 'react';
 import { H2 } from './Typography';
 import { EMAIL, PHONE } from '../constants';
 
-function ContactUs() {
+export function ContactUs() {
   return (
     <>
       <H2>Contact Us:</H2>
@@ -22,5 +22,3 @@ function ContactUs() {
     </>
   );
 }
-
-export default ContactUs;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import clsx from 'clsx';
 
 import { CODERPLEX_LOGO, DEFAULT_TITLE } from '../constants';
@@ -16,10 +16,14 @@ export function Header({ title = DEFAULT_TITLE }) {
   );
 }
 
-export const Container = ({ className, ...props }) => (
+interface Props {
+  className?: string;
+}
+
+export const Container: FunctionComponent<Props> = ({ className, ...props }) => (
   <main className={clsx(['pb-12 md:flex max-w-5xl mx-auto', className])} {...props} />
 );
 
-export const Section = ({ className, ...props }) => (
+export const Section: FunctionComponent<Props> = ({ className, ...props }) => (
   <section className={clsx(['border-gray-200', className])} {...props} />
 );

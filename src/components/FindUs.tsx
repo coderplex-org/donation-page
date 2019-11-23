@@ -1,9 +1,8 @@
 import React from 'react';
-
+import { BASE_URL, CHAT_URL, CROWDFUND_URL, MEETUP_URL } from '../constants';
 import { H2 } from './Typography';
-import { BASE_URL, MEETUP_URL, CHAT_URL, CROWDFUND_URL } from '../constants';
 
-function FindUs() {
+export function FindUs() {
   return (
     <>
       <H2>Find us on the Internet</H2>
@@ -36,5 +35,3 @@ function FindUs() {
     </>
   );
 }
-
-export default FindUs;
