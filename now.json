@@ -10,7 +10,7 @@
     "RZP_TEST_SECRET": "@rzp_test_secret",
     "AIRTABLE_KEY": "@airtable_key",
     "AIRTABLE_BASE_ID": "@airtable_base_id",
-    "AIRTABLE_TABLE_NAME": "@airtable_table_name",
+    "AIRTABLE__DONATIONS_TABLE_NAME": "@airtable_table_name",
     "AIRTABLE__FUNDING_TABLE_NAME": "@airtable__funding_table_name",
     "AIRTABLE__CAMPAIGN_TABLE_NAME": "@airtable__campaign_table_name"
   },
