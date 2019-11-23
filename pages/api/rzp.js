@@ -28,16 +28,18 @@ export default async function handler(req, res) {
         phone,
       },
     });
-    await donationsBase.create({
-      id,
-      Email: email,
-      Phone: phone,
-      'Donated Amount': Number(amount),
-      'Payment Method': paymentMethod,
-      Date: new Date(),
-      OrderId: data.id,
-      Status: data.status,
-    });
+    if (req.query.donate) {
+      await donationsBase.create({
+        id,
+        Email: email,
+        Phone: phone,
+        'Donated Amount': Number(amount),
+        'Payment Method': paymentMethod,
+        Date: new Date(),
+        OrderId: data.id,
+        Status: data.status,
+      });
+    }
     res.send(data);
   } catch (error) {
     console.log(error);

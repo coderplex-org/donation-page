@@ -1,5 +1,3 @@
-import isMobile from 'is-mobile';
-
 import FindUs from '../components/FindUs';
 import ContactUs from '../components/ContactUs';
 import PaymentForm from '../components/PaymentForm';
@@ -9,7 +7,6 @@ import { Header, Section, Container } from '../components/Layout';
 import { H1, H2, Paragraph } from '../components/Typography';
 
 export default function Index() {
-  const isMobileBrowser = isMobile();
   return (
     <>
       <SEO />

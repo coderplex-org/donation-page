@@ -13,8 +13,15 @@ import { getURL, getFinalAmount } from '../utils';
 import { openRzp } from '../services/rzp';
 import { saveUPIStatus } from '../services/upi';
 
-function PaymentForm({ onClose = () => null }) {
-  const initialState = { amount: 100, email: '', phone: '' };
+function PaymentForm({
+  onClose = () => null,
+  onSuccess = () => null,
+  collectName = false,
+  maxAmount = Number.MAX_SAFE_INTEGER,
+  actionName = 'Donate',
+}) {
+  const amount = 100 > maxAmount ? maxAmount : 100;
+  const initialState = { amount, email: '', phone: '', name: '' };
   const [form, setFormValue] = useState(initialState);
   const [url, setURL] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,7 +29,11 @@ function PaymentForm({ onClose = () => null }) {
   const finalAmount = getFinalAmount(form.amount);
   function onChange(e) {
     e.persist();
-    setFormValue(form => ({ ...form, [e.target.name]: e.target.value }));
+    let value = e.target.value;
+    if (e.target.name === 'amount') {
+      value = value < maxAmount ? value : maxAmount;
+    }
+    setFormValue(form => ({ ...form, [e.target.name]: value }));
   }
   function onSubmit(e) {
     e.preventDefault();
@@ -41,8 +52,8 @@ function PaymentForm({ onClose = () => null }) {
   }
   async function onRzpSubmit() {
     try {
-      const { amount, email, phone } = form;
-      if (!amount || !email || !phone) {
+      const { amount, email, phone, name } = form;
+      if (!amount || !email || !phone || (!name && collectName)) {
         return alert(`Please enter all required fields`);
       }
       if (Number(amount) < 1) {
@@ -52,7 +63,8 @@ function PaymentForm({ onClose = () => null }) {
       await openRzp({
         ...form,
         amount: finalAmount,
-      });
+        category: actionName.toLowerCase,
+      }).then(() => onSuccess({ ...form }));
       setIsSubmitting(false);
       setFormValue(initialState);
 
@@ -106,6 +118,25 @@ function PaymentForm({ onClose = () => null }) {
             />
           </div>
         </div>
+        {collectName && (
+          <div className="mb-4">
+            <label className="text-sm text-gray-500 mb-1 block" htmlFor="name">
+              Name <sup className="text-red-500">*</sup>
+            </label>
+            <div>
+              <input
+                className="bg-white focus:outline-0 border border-gray-300 rounded py-2 px-2 block w-full appearance-none leading-normal"
+                type="text"
+                name="name"
+                id="name"
+                value={form.name}
+                onChange={onChange}
+                required
+                disabled={isSubmitting}
+              />
+            </div>
+          </div>
+        )}
         <div className="mb-4">
           <label className="text-sm text-gray-500 mb-1 block" htmlFor="email">
             Email <sup className="text-red-500">*</sup>
@@ -150,7 +181,10 @@ function PaymentForm({ onClose = () => null }) {
               },
             ])}>
             <IconUPI width={21} height={24} />
-            <span className="ml-4">Donate ₹ {form.amount} using</span> <strong className="ml-1">UPI/QR</strong>
+            <span className="ml-4">
+              {actionName} ₹ {form.amount} using
+            </span>{' '}
+            <strong className="ml-1">UPI</strong>
           </button>
           <button
             type="button"
@@ -166,7 +200,9 @@ function PaymentForm({ onClose = () => null }) {
             ) : (
               <>
                 <IconCards width={27} height={22} />
-                <span className="md:ml-4 ml-2">Donate ₹ {finalAmount} using</span>
+                <span className="md:ml-4 ml-2">
+                  {actionName} ₹ {finalAmount} using
+                </span>
                 <strong className="ml-1">Debit/Credit cards</strong>
               </>
             )}
@@ -186,7 +222,9 @@ function PaymentForm({ onClose = () => null }) {
         <div className="w-full mb-4">
           <PaymentSuccess />
         </div>
-        <p className="text-center py-1 font-semibold text-xl text-pink-600">Thanks for your donation.</p>
+        <p className="text-center py-1 font-semibold text-xl text-pink-600">
+          Thanks for your {actionName === 'Donate' ? 'donation' : 'contribution'}.
+        </p>
         <p className="text-center text-sm text-gray-600">We truly appreciate your generosity :D</p>
       </Modal>
     </>

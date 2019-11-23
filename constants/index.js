@@ -8,10 +8,14 @@ export const THEME_COLOR = `#d53f8c`;
 
 export const BASE_URL = `https://coderplex.org`;
 export const MEETUP_URL = `https://meetup.com/coderplex`;
+export const CROWDFUND_URL = `https://donate.coderplex.org/crowdfund`;
 export const CHAT_URL = `${BASE_URL}/chat`;
 export const EMAIL = `support@coderplex.org`;
 export const PHONE = `+91-8125371202`;
 
 export const PROCESSING_CHARGE_PERCENT = 2.36;
+
+export const CAMPAIGNS_ROUTE = 'campaigns';
+export const FUNDINGS_ROUTE = 'fundings';
 
 export const RZP_KEY = process.env.NODE_ENV === 'development' ? process.env.RZP_TEST_KEY : process.env.RZP_LIVE_KEY;

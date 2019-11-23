@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { H2 } from './Typography';
-import { BASE_URL, MEETUP_URL, CHAT_URL } from '../constants';
+import { BASE_URL, MEETUP_URL, CHAT_URL, CROWDFUND_URL } from '../constants';
 
 function FindUs() {
   return (
@@ -12,6 +12,12 @@ function FindUs() {
           Website:{' '}
           <a className="text-blue-500 underline" href={BASE_URL}>
             {BASE_URL}
+          </a>
+        </li>
+        <li className="my-2 text-sm">
+          Crowdfunding:{' '}
+          <a className="text-blue-500 underline" href={CROWDFUND_URL}>
+            {CROWDFUND_URL}
           </a>
         </li>
         <li className="my-2 text-sm">
