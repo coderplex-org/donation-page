@@ -41,7 +41,7 @@ All work related to the application takes place on Github itself. We use [Issues
 
 ## Branching Model
 
-The `master` branch of donation-page is relatively stable branch which we use for both development and deployment. We also have auto deployment on this branch itself i.e any changes in that branch gets reflected in [https://donate.coderplex.org](https://donate.coderplex.org). 
+The `master` branch of donation-page is relatively stable branch which we use for both development and deployment. We also have auto deployment on this branch itself i.e any changes in that branch gets reflected in [https://donate.coderplex.org](https://donate.coderplex.org).
 
 ## Development Workflow
 
@@ -87,53 +87,53 @@ We welcome pull requests from beginners and seasoned JavaScript developers alike
 
 #### Running Locally
 
-1. Fork the [repository](https://github.com/coderplex/donation-page).
-1. Then clone your forked repository
-   ```bash
-    git clone <your forked repository url>
-   ```
-1. Move to the repository root folder
-   ```bash
-    cd donation-page
-   ```
-1. [Yarn](https://yarnpkg.com)
-
-   * Minimum version v1.2.0+
-   * Installing instructions are at [official docs](https://yarnpkg.com/en/docs/install#windows-tab). Use yarn over npm
-
-   > Our team's official policy (for now) is: We only use [Yarn](https://yarnpkg.com/en/docs/install) as our official Node package manager, and so we request you to use Yarn instead of npm and commit `yarn.lock` file.
-
-1. Install dependencies
-   ```bash
-    yarn
-   ```
-1. Setting up with few things, to get it running.
-This project uses some environment variables that hold the values required to make API calls to the API provided by [Razorpay](https://razorpay.com/) and [Airtable](https://airtable.com/). You can ignore this if you're just focussing on the frontend. But, you would need these, if you want to test the API calls made to process the payments or make changes to the API.
-
-    Create two files named `.env` and `.env.build` and those files should look something like this.
-    contents of `.env` file:
+1.  Fork the [repository](https://github.com/coderplex/donation-page).
+1.  Then clone your forked repository
+    ```bash
+     git clone <your forked repository url>
     ```
-    RZP_TEST_KEY=YOUR_TEST_KEY(optional)
-    RZP_TEST_SECRET=YOUR_TEST_SECRET(optional)
-    RZP_LIVE_KEY=
-    RZP_LIVE_SECRET=
-    AIRTABLE_KEY=
-    AIRTABLE_BASE_ID=
-    AIRTABLE_TABLE_NAME=
+1.  Move to the repository root folder
+    ```bash
+     cd donation-page
     ```
+1.  [Yarn](https://yarnpkg.com)
 
-    contents of `.env.build` file:
+    - Minimum version v1.2.0+
+    - Installing instructions are at [official docs](https://yarnpkg.com/en/docs/install#windows-tab). Use yarn over npm
 
+    > Our team's official policy (for now) is: We only use [Yarn](https://yarnpkg.com/en/docs/install) as our official Node package manager, and so we request you to use Yarn instead of npm and commit `yarn.lock` file.
+
+1.  Install dependencies
+    ```bash
+     yarn
     ```
-    RZP_TEST_KEY=YOUR_TEST_KEY(optional)
-    RZP_LIVE_KEY=
+1.  Setting up with few things, to get it running. This project uses some environment variables that hold the values required to make API calls to the API provided by [Razorpay](https://razorpay.com/) and [Airtable](https://airtable.com/). You can ignore this if you're just focussing on the frontend. But, you would need these, if you want to test the API calls made to process the payments or make changes to the API.
+
+        Create two files named `.env` and `.env.build` and those files should look something like this.
+        contents of `.env` file:
+        ```
+        RZP_TEST_KEY=YOUR_TEST_KEY(optional)
+        RZP_TEST_SECRET=YOUR_TEST_SECRET(optional)
+        RZP_LIVE_KEY=
+        RZP_LIVE_SECRET=
+        AIRTABLE_KEY=
+        AIRTABLE_BASE_ID=
+        AIRTABLE_TABLE_NAME=
+        ```
+
+        contents of `.env.build` file:
+
+        ```
+        RZP_TEST_KEY=YOUR_TEST_KEY(optional)
+        RZP_LIVE_KEY=
+        ```
+
+1.  Start the development server
+    ```bash
+     yarn dev
     ```
-1. Start the development server
-   ```bash
-    yarn dev
-   ```
-   Go to `localhost:3000` in the browser of your choice.
-   > You may get this [error](#local-host-occupied) if any other app is already running the above port.
+    Go to `localhost:3000` in the browser of your choice.
+    > You may get this [error](#local-host-occupied) if any other app is already running the above port.
 
 #### Before submitting
 
@@ -165,7 +165,7 @@ Follow the prompt and commit `.all-contributorsrc` and `README.md` in the PR.
 
 1. Pull latest code from [upstream repository's](https://help.github.com/articles/merging-an-upstream-repository-into-your-fork/)`master`, if in case anything new were merged while you were working on your fork.
 1. Push the code to your fork.
-1. Raise the pull request from your created branch to `master` branch of coderplex. 
+1. Raise the pull request from your created branch to `master` branch of coderplex.
 1. Take some time to give a brief description of the work you have done.
 
 #### After submitting
@@ -173,10 +173,10 @@ Follow the prompt and commit `.all-contributorsrc` and `README.md` in the PR.
 1. Wait for all checks to pass in below section.
    > You might see a check fail from now-bot saying that there are failures in deployment. Don't worry about it, you don't have access rights to deploy. You can see the status of your check once any reviewer triggers the deployment.
 1. The core team will review your pull request and either merge it, request changes to it, or close it with an explanation.
-<!-- 1. Your changes are deployed with a unique link `https://deploy-preview-xx--coderplex.netlify.com`.
 
-   _`- xx` is your pull request number._ -->
+   <!-- 1. Your changes are deployed with a unique link `https://deploy-preview-xx--coderplex.netlify.com`.
 
+      _`- xx` is your pull request number._ -->
 
 ##### Received a review request
 
