@@ -25,7 +25,8 @@ const App: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
     if (window.navigator.share) {
       const title = document.title;
       const url = window.location.href;
-      const text = document.querySelector("meta[property='description']").getAttribute('content');
+      const descriptionEl = document.querySelector("meta[name='description']");
+      const text = descriptionEl ? descriptionEl.getAttribute('content') : '';
       return window.navigator.share({ title, text: `${text} ${url}` });
     }
     // fallback to custom native share dialog
