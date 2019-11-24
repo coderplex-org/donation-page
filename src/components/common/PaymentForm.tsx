@@ -87,7 +87,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
   }
 
   return (
-    <div className={clsx('md:px-0', !inlineForm && 'px-4')}>
+    <div className={clsx(!inlineForm && 'px-4', inlineForm && 'md:px-0')}>
       <p className="text-lg mb-4 text-gray-700 leading-relaxed">We truly appreciate your generosity</p>
       <form name="payment" onSubmit={onSubmit}>
         <div className="mb-4 mt-4">

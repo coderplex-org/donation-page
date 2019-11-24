@@ -10,18 +10,8 @@ module.exports = {
             defaultExtractor: content =>
               content
                 .match(/[\w-/:%]+(?<!:)/g)
-                .concat(content.match(/html|body|after|before|snackbar|snackbarks|tippy|next|#nprogress/g)) || [],
-            whitelistPatterns: [
-              /html/,
-              /body/,
-              /after/,
-              /before/,
-              /tippy/,
-              /next/,
-              /snackbar/,
-              /snackbarks/,
-              /#nprogress/,
-            ],
+                .concat(content.match(/html|body|after|before|snackbar|snackbarks|tippy|next/g)) || [],
+            whitelistPatterns: [/html/, /body/, /after/, /before/, /tippy/, /next/, /snackbar/, /snackbarks/],
           }),
           require('cssnano'),
         ]
