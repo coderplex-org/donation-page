@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import useSWR from 'swr';
 
@@ -8,8 +8,10 @@ import { CampaignProgress } from './progress';
 import { Campaign } from '../../services/airtable';
 import { CampaignEmptyState } from '../empty-states/campaign';
 import fetch from '../../lib/fetch';
+import { ShareContext } from '../../services/share';
 
 export const CampaignList = () => {
+  const { isOpen, openShareDialog } = useContext(ShareContext);
   const { data, error } = useSWR<Campaign[]>('/api/campaigns', fetch);
 
   if (error) {
@@ -44,10 +46,11 @@ export const CampaignList = () => {
                 <CampaignProgress campaign={item} />
                 <div className="flex justify-between items-center">
                   <button
+                    disabled={isOpen}
                     onClick={e => {
                       e.stopPropagation();
                       e.preventDefault();
-                      alert('Hey');
+                      openShareDialog();
                     }}
                     className="p-4 text-center">
                     <ShareIcon />

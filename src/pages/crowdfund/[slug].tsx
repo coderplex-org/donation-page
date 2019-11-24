@@ -44,7 +44,7 @@ const CampaignPage: NextPage = ({ initialData, slug }) => {
             )}
           </div>
 
-          <div className="mt-6 md:mt-0 md:mx-2 md:w-1/3 md:bg-white md:p-4 md:shadow md:rounded-lg">
+          <div className="mt-10 md:mt-0 md:mx-2 md:w-1/3 md:bg-white md:p-4 md:shadow md:rounded-lg">
             <h2 className="text-xl mb-1 font-medium text-gray-800">Recent Contributions</h2>
             <p className="text-sm text-gray-700">A special thanks to all who raised the funds for this campaign.</p>
             <DonorsList campaign={data} />

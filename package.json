@@ -28,6 +28,7 @@
     "@zeit/next-css": "0.2.1-canary.4",
     "airtable": "^0.7.0",
     "clsx": "^1.0.4",
+    "copee": "^1.0.6",
     "cuid": "^2.1.6",
     "fromnow": "^3.0.1",
     "is-mobile": "^2.0.1",

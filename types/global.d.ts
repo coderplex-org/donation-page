@@ -10,4 +10,8 @@ declare global {
   interface Window {
     Razorpay: typeof Razorpay;
   }
+
+  interface Navigator {
+    share: (args: { title: string; text: string }) => void;
+  }
 }
