@@ -67,12 +67,11 @@ export const SEO: FunctionComponent<Props> = ({
   ];
   return (
     <Head>
-      <html lang={lang} />
       <title>{title}</title>
       <Favicons />
       <link rel="manifest" href="/static/manifest/manifest.json" />
       {meta.map((item, i) => (
-        <meta key={`meta-${i}`} {...item} />
+        <meta key={i} {...item} />
       ))}
     </Head>
   );
