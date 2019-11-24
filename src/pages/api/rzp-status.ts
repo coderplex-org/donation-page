@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { donationsBase, Views, fundingsBase, campaignsBase } from '../../services/airtable';
+import { donationsBase, Views, fundingsBase, campaignsBase, PaymentStatus } from '../../services/airtable';
 
 const RZP_SECRET = process.env.NODE_ENV === 'development' ? process.env.RZP_TEST_SECRET : process.env.RZP_LIVE_SECRET;
 
@@ -58,6 +58,11 @@ async function updateStateInAirtable({ razorpay_order_id, razorpay_payment_id, s
     if (!record.id) {
       return;
     }
+
+    if (status !== PaymentStatus.captured) {
+      return fundingsBase.update(record.id, data);
+    }
+
     return Promise.all([
       fundingsBase.update(record.id, data),
       campaignsBase.update(result.id, {
