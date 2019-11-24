@@ -7,11 +7,12 @@ import { CampaignList } from './list';
 
 interface Props {
   hideHeader?: boolean;
+  inline?: boolean;
 }
 
-export const CrowdFundList: FunctionComponent<Props> = ({ hideHeader = false }) => {
+export const CrowdFundList: FunctionComponent<Props> = ({ hideHeader = false, inline = false }) => {
   return (
-    <div className={clsx('pb-20 md:pb-0 md:max-w-5xl mx-auto', hideHeader && 'pt-6')}>
+    <div className={clsx('pb-20 md:pb-0 w-full', hideHeader && 'pt-6', !inline && 'md:max-w-5xl mx-auto')}>
       <header className={clsx(hideHeader && 'hidden')}>
         <Link href="/">
           <a className="p-4 inline-block">

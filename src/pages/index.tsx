@@ -21,7 +21,7 @@ export default function Index() {
         <HomeContent />
       </Div100vh>
       <div className="hidden md:block mx-auto px-4" style={{ marginLeft: '24rem' }}>
-        <CrowdFundList hideHeader />
+        <CrowdFundList hideHeader inline />
         <HelpInfo />
       </div>
     </>
