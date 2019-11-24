@@ -10,7 +10,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en" className="text-gray-900 antialiased leading-tight">
         <Head />
-        <body className="bg-gray-100">
+        <body>
           <Main />
           <NextScript />
           <script src="https://checkout.razorpay.com/v1/checkout.js" />

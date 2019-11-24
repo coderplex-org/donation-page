@@ -1,7 +1,8 @@
 import Razorpay from 'razorpay';
 import cuid from 'cuid';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-import { donationsBase } from '../../services/airtable';
+import { donationsBase, PaymentStatus, fundingsBase } from '../../services/airtable';
 
 const RZP_KEY = process.env.NODE_ENV === 'development' ? process.env.RZP_TEST_KEY : process.env.RZP_LIVE_KEY;
 
@@ -14,11 +15,11 @@ const rzpCredentials = {
 
 const razorpay = new Razorpay(rzpCredentials);
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { email, amount, phone, paymentMethod = 'Razorpay' } = req.body;
+    const { email, name, amount, phone, paymentMethod = 'Razorpay', campaign } = req.body;
     const id = cuid();
-    const data = await razorpay.orders.create({
+    const data: { id: string; status: PaymentStatus } = await razorpay.orders.create({
       amount: amount * 100, // in paise
       currency: 'INR',
       receipt: id,
@@ -26,18 +27,34 @@ export default async function handler(req, res) {
       notes: {
         email,
         phone,
+        name,
+        campaign,
       },
     });
-    if (req.query.donate) {
+    if (campaign) {
+      await fundingsBase.create({
+        id,
+        name,
+        email,
+        phone,
+        campaign,
+        donated_amount: amount,
+        payment_method: paymentMethod,
+        status: PaymentStatus.created,
+        order_id: data.id,
+        created_at: Date.now(),
+      });
+    } else {
       await donationsBase.create({
         id,
-        Email: email,
-        Phone: phone,
-        'Donated Amount': Number(amount),
-        'Payment Method': paymentMethod,
-        Date: new Date(),
-        OrderId: data.id,
-        Status: data.status,
+        name,
+        email,
+        phone,
+        donated_amount: amount,
+        payment_method: paymentMethod,
+        status: PaymentStatus.created,
+        order_id: data.id,
+        created_at: Date.now(),
       });
     }
     res.send(data);

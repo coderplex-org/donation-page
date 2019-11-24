@@ -1,7 +1,16 @@
 import { RZP_KEY, DEFAULT_TITLE, DEFAULT_DESCRIPTION, CODERPLEX_LOGO, THEME_COLOR } from '../constants';
+import { RzpResponse } from '../../types/rzp';
 
-async function getOrderId(data) {
-  return fetch(`/api/rzp${data.category === 'donate' ? `?donate=true` : ``}`, {
+interface RzpData {
+  name: string;
+  email: string;
+  amount: number;
+  phone: string;
+  campaign?: string;
+}
+
+async function getOrderId(data: RzpData) {
+  return fetch(`/api/rzp`, {
     method: 'post',
     headers: {
       'content-type': 'application/json',
@@ -24,7 +33,7 @@ async function updateStatus(data) {
   });
 }
 
-export async function openRzp(data) {
+export async function openRzp(data: RzpData) {
   return new Promise(async (resolve, reject) => {
     try {
       const { email, phone, amount } = data;
@@ -36,9 +45,9 @@ export async function openRzp(data) {
         name: DEFAULT_TITLE,
         description: DEFAULT_DESCRIPTION,
         image: CODERPLEX_LOGO,
-        handler: async res => {
+        handler: async (res: RzpResponse) => {
           try {
-            await updateStatus({ ...res, status: 'captured' });
+            await updateStatus({ ...res, status: 'captured', campaign: data.campaign });
             resolve();
           } catch (error) {
             reject(error);
@@ -49,6 +58,7 @@ export async function openRzp(data) {
             await updateStatus({
               razorpay_order_id: order.id,
               status: 'failed',
+              campaign: data.campaign,
             });
             reject(new Error(`Payment widget is closed without completing payment. Please try again!`));
           },
@@ -64,7 +74,7 @@ export async function openRzp(data) {
           netbanking: true,
           card: true,
           wallet: true,
-          upi: false,
+          upi: true,
         },
       };
       const razorpay = new window.Razorpay(options);

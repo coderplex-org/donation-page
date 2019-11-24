@@ -1,3 +1,123 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-image: radial-gradient(#d7d7d7 1px, transparent 1px), radial-gradient(#d7d7d7 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+}
+
+.btn-loader {
+  animation: loading 20s linear infinite;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABQCAYAAACpv3NFAAADGklEQVR4AWIYSPD//39AsXah4ooORWGYcam767i7+/u/1F3XFxDOrp3+wMcKkZKZhF1dmce/j+GPN+3j0v+AVdgKffprsBX69Ndl7Z/09lpSPN/7Imv09V9P2LD0djw+Pfz0N0Dr+OnLJmiNLn5bsBX09G0j25bLskFf/22zYyne5xY6f5Uufjugbfr0t2QXtE4XvwyJLn4bkpWMZAH49c9IzknW0tuLGnfoc/+a5H6DvKVYn5EMffo7kgdt0sWvAFuhn/qKoF36+uek9I+ipbUT4yacnxg36/Tr/rJvKFC29HY8npbHn/qkDNqmi18FtkI/9VVBWfr6l6TmpGop1rd4G/Tr/toE6pbennd+iT79vNRBO/SHHnVpQOr0pz670gQV6OtfldY/mpZifYFZ19PFb1Na0p5Qy9LaM4/X6NMvSnuJOpZ/yqDFzzZDaNPFLytdDv/c35QeaJMufr2EvqW343EXz2/Sp1+RvgwsxfoC0fpgPIsWP9sIoU8Xv5wMQVX6+ndkBNqiP/Ed22bGlimjqebHuvTp12XPjC1jtsbbU8zPo8XPNkMY08WvIPugOn39+3IA2qZ/53MoB5ZifcF4IFo/wF/3y5EcWor1BaL1wXiRLn5Hcuy5RId08SvJMYd/4zOSE9AO/XXXqW3m1HIZxvTpt+XMnFqm+Bxvx+NpZfqHTidyLmfOnFuK9UXi9Sf0L73Kcg7q0Nf/QC4odPHblUvQAX36PblKuLQU75t/vqnQxe9CruTaMsHmBHxusP6CLn5VuQb16Ot/LDegXbr43YKO6dMfyN0v3Fp6OxyfUJUufjdyZ+4trZ0Yj8Trb+niV0ts+MFSrG/xhvT1P5MHUIb+je8j6Bz/0EOeQHW6+D3K8wSeLBNsjrWD8Ue6+DXkeUYvltaeZj3/qc+lvICy9A+dXkFX9OnvyxuoSRe/V3mfwpultWea/0oXv6a8Bz4sE2zORHwN/6nPjXyAcvQPnT5Bt/TpH8oXqE0Xvw/5nsGXpbfDcfMh6/TXXT//+LZMsDneToxHbO4Rff3v4z8wHp+Wrc2Rf/8fKrJDJf0nqJwAAAAASUVORK5CYII=);
+  background-origin: border-box;
+  background-position: 0 0;
+  background-repeat: repeat-x;
+  background-size: contain;
+  pointer-events: none;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 700% 0;
+  }
+}
+
+.skeleton-box {
+  position: relative;
+  overflow: hidden;
+  background-color: #e2e8f0;
+}
+
+.skeleton-box::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 3s infinite;
+  content: '';
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+#nprogress {
+  pointer-events: none;
+}
+#nprogress .bar {
+  background: #aa97fb;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+}
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #aa97fb, 0 0 5px #aa97fb;
+  opacity: 1;
+  transform: rotate(3deg) translate(0px, -4px);
+}
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 1031;
+  top: 15px;
+  right: 15px;
+}
+#nprogress .spinner-icon {
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  border: solid 2px transparent;
+  border-top-color: #aa97fb;
+  border-left-color: #aa97fb;
+  border-radius: 50%;
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+  animation: nprogress-spinner 400ms linear infinite;
+}
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+@-webkit-keyframes nprogress-spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes nprogress-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

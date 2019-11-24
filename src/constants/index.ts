@@ -6,12 +6,16 @@ export const DEFAULT_TITLE = `Donate to Coderplex`;
 export const DEFAULT_DESCRIPTION = `Coderplex Foundation is a registered non-profit org on a mission to improve the state of tech in India.`;
 export const THEME_COLOR = `#d53f8c`;
 
+export const APP_HOST =
+  process.env.NODE_ENV === 'development' ? `http://localhost:3000` : `https://donate.coderplex.org`;
 export const BASE_URL = `https://coderplex.org`;
 export const MEETUP_URL = `https://meetup.com/coderplex`;
 export const CROWDFUND_URL = `https://donate.coderplex.org/crowdfund`;
 export const CHAT_URL = `${BASE_URL}/chat`;
 export const EMAIL = `support@coderplex.org`;
 export const PHONE = `+91-8125371202`;
+export const FACEBOOK = `https://fb.me/coderplex`;
+export const TWITTER = `https://twitter.com/coderplex`;
 
 export const PROCESSING_CHARGE_PERCENT = 2.36;
 

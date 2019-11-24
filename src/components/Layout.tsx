@@ -1,16 +1,15 @@
 import React, { FunctionComponent } from 'react';
 import clsx from 'clsx';
 
-import { CODERPLEX_LOGO, DEFAULT_TITLE } from '../constants';
+import { CODERPLEX_LOGO } from '../constants';
 
-export function Header({ title = DEFAULT_TITLE }) {
+export function Header() {
   return (
-    <header className="py-4 px-4 text-center border-b border-gray-200">
-      <div className="max-w-5xl mx-auto w-full md:text-left md:flex items-center md:px-4">
-        <div className="w-12 h-12 mx-auto md:mx-0">
+    <header className="py-4 px-4">
+      <div className="max-w-5xl w-full md:text-left md:flex items-center md:px-4 flex justify-center">
+        <div className="w-40 h-40 mx-auto md:mx-0">
           <img src={CODERPLEX_LOGO} alt="coderplex logo" className="w-full rounded-full" />
         </div>
-        <div className="text-md font-semibold text-pink-500 text-center md:text-left md:ml-1">{title}</div>
       </div>
     </header>
   );

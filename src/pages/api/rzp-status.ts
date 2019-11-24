@@ -1,9 +1,11 @@
-const crypto = require('crypto');
-import { donationsBase } from '../../services/airtable';
+import crypto from 'crypto';
+import { NextApiRequest, NextApiResponse } from 'next';
+
+import { donationsBase, Views, fundingsBase, campaignsBase } from '../../services/airtable';
 
 const RZP_SECRET = process.env.NODE_ENV === 'development' ? process.env.RZP_TEST_SECRET : process.env.RZP_LIVE_SECRET;
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature, status } = req.body;
     if (status !== 'captured') {
@@ -29,18 +31,54 @@ export default async function handler(req, res) {
   }
 }
 
-async function updateStateInAirtable({ razorpay_order_id, razorpay_payment_id, status }) {
+async function updateStateInAirtable({ razorpay_order_id, razorpay_payment_id, status, campaign }) {
+  const query = {
+    filterByFormula: `{order_id} = "${razorpay_order_id}"`,
+    view: Views.grid,
+  };
+
+  const data = {
+    status: status,
+    payment_id: razorpay_payment_id || '',
+  };
+
+  if (campaign) {
+    const [result] = await campaignsBase
+      .select({
+        filterByFormula: `{slug} = "${campaign}"`,
+        view: Views.grid,
+      })
+      .firstPage();
+
+    if (!result) {
+      return updateDonationBase({ razorpay_order_id, ...data });
+    }
+
+    const [record] = await fundingsBase.select(query).firstPage();
+    if (!record.id) {
+      return;
+    }
+    return Promise.all([
+      fundingsBase.update(record.id, data),
+      campaignsBase.update(result.id, {
+        amount_raised: result.fields.amount_raised + record.fields.donated_amount,
+        donations_count: result.fields.donations_count + 1,
+      }),
+    ]);
+  }
+
+  return updateDonationBase({ razorpay_order_id, ...data });
+}
+
+async function updateDonationBase({ razorpay_order_id, status, payment_id = '' }) {
   const [record] = await donationsBase
     .select({
-      filterByFormula: `{OrderId} = "${razorpay_order_id}"`,
-      view: 'table',
+      filterByFormula: `{order_id} = "${razorpay_order_id}"`,
+      view: Views.grid,
     })
     .firstPage();
   if (!record.id) {
     return;
   }
-  return donationsBase.update(record.id, {
-    Status: status,
-    'Payment Id': razorpay_payment_id || '',
-  });
+  return donationsBase.update(record.id, { status, payment_id });
 }

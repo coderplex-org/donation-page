@@ -1,0 +1,64 @@
+import React from 'react';
+import Link from 'next/link';
+import useSWR from 'swr';
+
+import { Button } from '../common/Button';
+import { ShareIcon } from '../Icons/common';
+import { CampaignProgress } from './progress';
+import { Campaign } from '../../services/airtable';
+import { CampaignEmptyState } from '../empty-states/campaign';
+import fetch from '../../lib/fetch';
+
+export const CampaignList = () => {
+  const { data, error } = useSWR<Campaign[]>('/api/campaigns', fetch);
+
+  if (error) {
+    return (
+      <div className="mx-0 my-4 md:mx-4 md:h-64">
+        <h3 className="text-lg md:text-xl mb-1 text-red-700">{error.message || 'An error occured. Try again later'}</h3>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return <CampaignEmptyState />;
+  }
+
+  if (data.length === 0) {
+    return (
+      <div className="mx-0 my-4 md:mx-4 md:h-64">
+        <h3 className="text-lg md:text-xl mb-1 text-gray-700">Sorry, no active campaigns found!</h3>
+      </div>
+    );
+  }
+
+  return (
+    <ul className="w-full md:flex md:flex-wrap">
+      {data.map(item => {
+        return (
+          <li key={item.id} className="mx-0 my-4 md:mx-4">
+            <Link href="/crowdfund/[slug]" as={`/crowdfund/${item.slug}`}>
+              <a className="block p-4 bg-white shadow-lg rounded-lg">
+                <h3 className="text-xl mb-1 font-medium text-gray-800">{item.title}</h3>
+                <p className="text-sm mb-4 text-gray-700">{item.short_description}</p>
+                <CampaignProgress campaign={item} />
+                <div className="flex justify-between items-center">
+                  <button
+                    onClick={e => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      alert('Hey');
+                    }}
+                    className="p-4 text-center">
+                    <ShareIcon />
+                  </button>
+                  <Button>Contribute</Button>
+                </div>
+              </a>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
