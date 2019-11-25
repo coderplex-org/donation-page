@@ -3,7 +3,8 @@ import Router from 'next/router';
 import { NextPageContext } from 'next';
 
 export function getFinalAmount(amount: number) {
-  return Number(amount) * (1 + PROCESSING_CHARGE_PERCENT / 100);
+  const finalAmount = Number(amount) * (1 + PROCESSING_CHARGE_PERCENT / 100);
+  return Math.round(finalAmount * 100) / 100;
 }
 
 export const redirect = (ctx: NextPageContext, to = '/') => {
@@ -14,3 +15,7 @@ export const redirect = (ctx: NextPageContext, to = '/') => {
   }
   Router.push(to);
 };
+
+export function truncateString(str: string, num: number) {
+  return str.length > num ? str.slice(0, num) + '...' : str;
+}

@@ -5,6 +5,7 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 
 import { AwardIcon } from '../../components/Icons/common';
 import { CampaignWithFundings } from '../../services/airtable';
+import { truncateString } from '../../utils';
 
 interface Props {
   campaign: CampaignWithFundings;
@@ -43,7 +44,9 @@ export const DonorsList: FunctionComponent<Props> = ({ campaign }) => {
                     <AwardIcon />
                   </div>
                   <div className="flex-1">
-                    <h6 className="font-medium text-gray-800">{item.name}</h6>
+                    <h6 className="font-medium text-gray-800" title={item.name}>
+                      {truncateString(item.name, 15)}
+                    </h6>
                     <p className="text-xs text-gray-600">
                       {fromnow(new Date(item.created_at), { max: 2, suffix: true })}
                     </p>

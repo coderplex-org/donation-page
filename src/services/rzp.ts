@@ -1,5 +1,6 @@
 import { RZP_KEY, DEFAULT_TITLE, DEFAULT_DESCRIPTION, CODERPLEX_LOGO, THEME_COLOR } from '../constants';
 import { RzpResponse } from '../../types/rzp';
+import { getFinalAmount } from '../utils';
 
 interface RzpData {
   name: string;
@@ -40,7 +41,7 @@ export async function openRzp(data: RzpData) {
       const order = await getOrderId(data);
       const options = {
         key: RZP_KEY,
-        amount: amount * 100, // in paisa
+        amount: getFinalAmount(amount) * 100, // in paisa
         order_id: order.id,
         name: DEFAULT_TITLE,
         description: DEFAULT_DESCRIPTION,

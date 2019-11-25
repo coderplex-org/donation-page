@@ -3,6 +3,7 @@ import cuid from 'cuid';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { donationsBase, PaymentStatus, fundingsBase } from '../../services/airtable';
+import { getFinalAmount } from '../../utils';
 
 const RZP_KEY = process.env.NODE_ENV === 'development' ? process.env.RZP_TEST_KEY : process.env.RZP_LIVE_KEY;
 
@@ -20,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { email, name, amount, phone, paymentMethod = 'Razorpay', campaign } = req.body;
     const id = cuid();
     const data: { id: string; status: PaymentStatus } = await razorpay.orders.create({
-      amount: amount * 100, // in paise
+      amount: getFinalAmount(Number(amount)) * 100, // in paise
       currency: 'INR',
       receipt: id,
       payment_capture: true,
