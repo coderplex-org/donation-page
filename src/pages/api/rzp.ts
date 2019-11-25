@@ -33,30 +33,36 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     });
     if (campaign) {
-      await fundingsBase.create({
-        id,
-        name,
-        email,
-        phone,
-        campaign,
-        donated_amount: amount,
-        payment_method: paymentMethod,
-        status: PaymentStatus.created,
-        order_id: data.id,
-        created_at: Date.now(),
-      });
+      await fundingsBase.create(
+        {
+          id,
+          name,
+          email,
+          phone,
+          campaign,
+          donated_amount: Number(amount),
+          payment_method: paymentMethod,
+          status: PaymentStatus.created,
+          order_id: data.id,
+          created_at: Date.now(),
+        },
+        { typecast: true }
+      );
     } else {
-      await donationsBase.create({
-        id,
-        name,
-        email,
-        phone,
-        donated_amount: amount,
-        payment_method: paymentMethod,
-        status: PaymentStatus.created,
-        order_id: data.id,
-        created_at: Date.now(),
-      });
+      await donationsBase.create(
+        {
+          id,
+          name,
+          email,
+          phone,
+          donated_amount: Number(amount),
+          payment_method: paymentMethod,
+          status: PaymentStatus.created,
+          order_id: data.id,
+          created_at: Date.now(),
+        },
+        { typecast: true }
+      );
     }
     res.send(data);
   } catch (error) {
