@@ -74,7 +74,6 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
       setIsSubmitting(true);
       await openRzp({
         ...form,
-        amount,
         campaign: campaign ? campaign.slug : undefined,
       });
       setIsSubmitting(false);
