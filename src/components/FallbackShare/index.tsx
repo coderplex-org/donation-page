@@ -3,20 +3,18 @@ import { toClipboard } from 'copee';
 
 import { ShareContext } from '../../services/share';
 import { WhatsappIcon, FacebookIcon, MessangerIcon, TwitterIcon, CopyIcon } from '../Icons/Share';
+import { DEFAULT_TITLE, APP_HOST } from '../../constants';
+import { useRouter } from 'next/router';
 
 export function FallbackShare() {
   const { closeShareDialog, isOpen } = useContext(ShareContext);
-  const [isMounted, setIsMounted] = useState(false);
+  const [{ title, url }, setShareInfo] = useState({ title: DEFAULT_TITLE, url: APP_HOST });
+  const route = useRouter();
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-
-  const title = document.title;
-  const url = window.location.href;
+    const title = document.title;
+    const url = window.location.href;
+    setShareInfo({ title, url });
+  }, [route.pathname]);
 
   const whatsappText = `${title}\n\n${url}`;
   function copy() {
@@ -29,7 +27,7 @@ export function FallbackShare() {
   }
   return (
     <div className="container" role="button" onClick={closeShareDialog}>
-      <div className="popup shadow-2xl bg-gray-100 border border-gray-200">
+      <div className="popup shadow-2xl bg-white border border-gray-200">
         <h3>Share via</h3>
         <ul>
           <li>
@@ -80,8 +78,8 @@ export function FallbackShare() {
         {`
           .container {
             width: 100%;
-            height: 100vh;
-            position: absolute;
+            min-height: 100vh;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
@@ -89,8 +87,9 @@ export function FallbackShare() {
             z-index: ${isOpen ? 1000 : -1};
           }
           .popup {
+            max-width: 380px;
             min-height: 240px;
-            bottom: 80px;
+            bottom: 20px;
             position: absolute;
             z-index: 2;
             padding: 12px 4px;
@@ -136,6 +135,13 @@ export function FallbackShare() {
             justify-content: center;
             margin: 0 auto;
             color: #888;
+          }
+          @media (min-height: 720px) {
+            .popup {
+              left: 50%;
+              right: auto;
+              bottom: 50%;
+            }
           }
         `}
       </style>

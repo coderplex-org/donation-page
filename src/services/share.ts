@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 export const ShareContext = React.createContext({
   isOpen: false,
-  openShareDialog: () => null,
-  closeShareDialog: () => null,
+  openShareDialog: (e: MouseEvent<HTMLButtonElement>) => null,
+  closeShareDialog: (e: MouseEvent<HTMLButtonElement | HTMLDivElement>) => null,
 });

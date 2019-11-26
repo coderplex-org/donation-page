@@ -35,7 +35,10 @@ const CampaignPage: NextPage = ({ initialData, slug }) => {
         <div className="p-4 pt-0 lg:flex">
           <div className="md:mx-2 md:mr-8 lg:flex-1">
             <h1 className="text-2xl mb-2 font-medium text-gray-800">{data.title}</h1>
-            <p className="text-lg mb-4 text-gray-700 leading-relaxed">{data.description}</p>
+            <p
+              className="text-lg mb-4 text-gray-700 leading-relaxed markdown"
+              dangerouslySetInnerHTML={{ __html: data.description }}
+            />
             <CampaignProgress campaign={data} />
             {data.is_active && (
               <div className="mt-6 md:mt-0">

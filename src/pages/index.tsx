@@ -10,7 +10,7 @@ export default function Index() {
   return (
     <>
       <SEO />
-      <Div100vh className="w-full md:max-w-sm md:flex md:flex-col md:justify-center md:bg-gray-100 md:fixed md:left-0 md:top-0">
+      <Div100vh className="w-full md:max-w-sm md:flex md:flex-col md:bg-gray-100 md:fixed md:left-0 md:top-0 md:overflow-auto">
         <header className="py-4 px-4">
           <div className="w-full items-center flex justify-center">
             <div className="w-40 h-40 mx-auto">

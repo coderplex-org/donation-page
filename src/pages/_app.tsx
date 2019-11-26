@@ -1,9 +1,10 @@
 import '../styles/index.css';
 
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, MouseEvent } from 'react';
 import { AppProps } from 'next/app';
 import Div100vh from 'react-div-100vh';
 import NProgress from 'nprogress';
+import usePortal from 'react-useportal';
 import Router from 'next/router';
 import Head from 'next/head';
 
@@ -19,8 +20,8 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 const App: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
-  const [showFallbackShare, setShowFallbackShare] = useState(false);
-  function openShareDialog() {
+  const { openPortal, closePortal, isOpen, Portal } = usePortal();
+  function openShareDialog(e: MouseEvent<HTMLButtonElement>) {
     // try to open native share dialog
     if (window.navigator.share) {
       const title = document.title;
@@ -30,10 +31,10 @@ const App: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
       return window.navigator.share({ title, text: `${text} ${url}` });
     }
     // fallback to custom native share dialog
-    return setShowFallbackShare(true);
+    return openPortal(e);
   }
-  function closeShareDialog() {
-    setShowFallbackShare(false);
+  function closeShareDialog(e: MouseEvent<HTMLButtonElement>) {
+    closePortal(e);
   }
   return (
     <>
@@ -41,12 +42,14 @@ const App: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
         {/* Import CSS for nprogress */}
         <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
-      <ShareContext.Provider value={{ openShareDialog, closeShareDialog, isOpen: showFallbackShare }}>
-        <Div100vh className="relative">
+      <ShareContext.Provider value={{ openShareDialog, closeShareDialog, isOpen: isOpen }}>
+        <Div100vh>
           <Component {...pageProps} />
-          <FallbackShare />
           <MobileMenu />
         </Div100vh>
+        <Portal>
+          <FallbackShare />
+        </Portal>
       </ShareContext.Provider>
     </>
   );

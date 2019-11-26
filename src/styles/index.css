@@ -18,6 +18,50 @@ body {
   pointer-events: none;
 }
 
+.markdown > * + *,
+.markdown li + li,
+.markdown li > p + p {
+  @apply mt-6;
+}
+.markdown strong {
+  @apply text-black font-bold;
+}
+.markdown a {
+  @apply text-black font-normal text-indigo-500;
+  &:hover {
+    @apply text-indigo-700;
+  }
+}
+.markdown strong a {
+  @apply font-bold;
+}
+.markdown h2 {
+  @apply leading-tight text-xl font-bold text-black mb-2 mt-10;
+}
+.markdown h3 {
+  @apply leading-tight text-lg font-bold text-black mt-8 -mb-2;
+}
+.markdown code {
+  @apply font-mono text-sm inline bg-gray-500 px-1;
+}
+.markdown pre code {
+  @apply block bg-black p-4 rounded;
+}
+.markdown blockquote {
+  @apply border-l-4 border-gray-500 pl-4 italic;
+}
+.markdown ul,
+.markdown ol {
+  list-style: unset;
+  @apply pl-5;
+  @screen sm {
+    @apply pl-10;
+  }
+}
+.markdown img {
+  width: 100%;
+}
+
 @keyframes loading {
   0% {
     background-position: 0 0;

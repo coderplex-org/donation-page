@@ -40,6 +40,7 @@
     "react": "^16.8.6",
     "react-div-100vh": "^0.3.4",
     "react-dom": "^16.8.6",
+    "react-useportal": "^1.0.13",
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "swr": "^0.1.12"
@@ -57,6 +58,7 @@
     "next-manifest": "^2.0.0",
     "next-purgecss": "^3.1.1",
     "postcss-easy-import": "^3.0.0",
+    "postcss-nesting": "^7.0.1",
     "prettier": "^1.18.2",
     "tailwindcss": "^1.0.5",
     "typescript": "^3.7.2"
