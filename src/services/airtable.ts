@@ -41,6 +41,7 @@ export interface Campaign {
   slug: string;
   title: string;
   description: string;
+  meta_description: string;
   short_description: string;
   required_amount: number;
   amount_raised: number;

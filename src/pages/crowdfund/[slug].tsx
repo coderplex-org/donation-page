@@ -25,7 +25,7 @@ const CampaignPage: NextPage = ({ initialData, slug }) => {
   const { data } = useSWR<CampaignWithFundings>(`/api/campaigns/${slug}`, fetch, { initialData });
   return (
     <>
-      <SEO title={`${data.title} | Campaign | Coderplex Foundation`} description={data.description} />
+      <SEO title={`${data.title} | Campaign | Coderplex Foundation`} description={data.meta_description} />
       <div className="pb-20 md:pb-0 md:max-w-5xl mx-auto">
         <header>
           <Link href="/crowdfund">
