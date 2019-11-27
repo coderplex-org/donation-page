@@ -9,6 +9,7 @@ import { Campaign } from '../../services/airtable';
 import { CampaignEmptyState } from '../empty-states/campaign';
 import fetch from '../../lib/fetch';
 import { ShareContext } from '../../services/share';
+import { truncateString } from '../../utils';
 
 export const CampaignList = () => {
   const { isOpen, openShareDialog } = useContext(ShareContext);
@@ -40,9 +41,15 @@ export const CampaignList = () => {
         return (
           <li key={item.id} className="mx-0 my-4 md:mx-4">
             <Link href="/crowdfund/[slug]" as={`/crowdfund/${item.slug}`}>
-              <a className="block p-4 px-6 bg-white shadow-lg rounded-lg">
-                <h3 className="text-xl mb-1 font-medium text-gray-800">{item.title}</h3>
-                <p className="text-sm mb-4 text-gray-700">{item.short_description}</p>
+              <a className="block p-4 px-6 bg-white shadow-lg rounded-lg" style={{ maxWidth: 360 }}>
+                <h3 className="text-xl mb-1 font-medium text-gray-800">
+                  <span className="hidden md:block">{truncateString(item.title, 30)}</span>
+                  <span className="md:hidden">{item.title}</span>
+                </h3>
+                <p className="text-sm mb-4 text-gray-700">
+                  <span className="hidden md:block">{truncateString(item.short_description, 45)}</span>
+                  <span className="md:hidden">{item.short_description}</span>
+                </p>
                 <CampaignProgress campaign={item} />
                 <div className="flex justify-between items-center">
                   <button
