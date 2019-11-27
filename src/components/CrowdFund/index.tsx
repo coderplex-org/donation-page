@@ -25,7 +25,7 @@ export const CrowdFundList: FunctionComponent<Props> = ({ hideHeader = false, in
           <TerminalIcon />
           <span className="inline-block ml-2">Crowdfunding Campaigns</span>
         </h1>
-        <CampaignList />
+        <CampaignList inline={inline} />
       </div>
     </div>
   );

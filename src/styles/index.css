@@ -41,6 +41,12 @@ body {
 .markdown h3 {
   @apply leading-tight text-lg font-bold text-black mt-8 -mb-2;
 }
+.markdown p {
+  @apply text-sm font-medium leading-relaxed;
+  @media (min-width: 768px) {
+    @apply text-base;
+  }
+}
 .markdown code {
   @apply font-mono text-sm inline bg-gray-500 px-1;
 }
