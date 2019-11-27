@@ -41,7 +41,7 @@ export const CampaignList = () => {
         return (
           <li key={item.id} className="mx-0 my-4 md:mx-4">
             <Link href="/crowdfund/[slug]" as={`/crowdfund/${item.slug}`}>
-              <a className="block p-4 px-6 bg-white shadow-lg rounded-lg" style={{ maxWidth: 360 }}>
+              <a className="block p-4 px-6 bg-white shadow-lg rounded-lg" style={{ maxWidth: 420 }}>
                 <h3 className="text-xl mb-1 font-medium text-gray-800">
                   <span className="hidden md:block">{truncateString(item.title, 30)}</span>
                   <span className="md:hidden">{item.title}</span>

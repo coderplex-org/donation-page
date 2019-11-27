@@ -1,6 +1,8 @@
 import React from 'react';
 import useSWR from 'swr';
 import Link from 'next/link';
+import snarkdown from 'md.js';
+
 import { NextPageContext, NextComponentType } from 'next';
 import { SEO } from '../../components/SEO';
 import { PaymentForm } from '../../components/common/PaymentForm';
@@ -35,9 +37,9 @@ const CampaignPage: NextPage = ({ initialData, slug }) => {
         <div className="p-4 pt-0 lg:flex">
           <div className="md:mx-2 md:mr-8 lg:flex-1">
             <h1 className="text-2xl mb-2 font-medium text-gray-800">{data.title}</h1>
-            <p
+            <div
               className="text-lg mb-4 text-gray-700 leading-relaxed markdown"
-              dangerouslySetInnerHTML={{ __html: data.description }}
+              dangerouslySetInnerHTML={{ __html: snarkdown(data.description) }}
             />
             <CampaignProgress campaign={data} />
             {data.is_active && (

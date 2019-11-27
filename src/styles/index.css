@@ -21,7 +21,7 @@ body {
 .markdown > * + *,
 .markdown li + li,
 .markdown li > p + p {
-  @apply mt-6;
+  @apply mt-4;
 }
 .markdown strong {
   @apply text-black font-bold;

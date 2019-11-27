@@ -33,6 +33,7 @@
     "fromnow": "^3.0.1",
     "is-mobile": "^2.0.1",
     "isomorphic-unfetch": "^3.0.0",
+    "md.js": "^0.2.6",
     "next": "^9.1.4",
     "nprogress": "^0.2.0",
     "qrcode.react": "^0.9.3",
