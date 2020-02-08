@@ -26,7 +26,7 @@ export interface Donation {
   phone: string;
   donated_amount: number;
   payment_method: string;
-  created_at: number;
+  created_at: string;
   order_id: string;
   payment_id?: string;
   status: PaymentStatus;
@@ -47,7 +47,7 @@ export interface Campaign {
   amount_raised: number;
   donations_count: number;
   organized_by: string;
-  created_at: number;
+  created_at: string;
   is_active: boolean;
 }
 
