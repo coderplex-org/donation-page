@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { BackIcon } from '../components/Icons/common';
+import { BackIcon } from '../../components/Icons/common';
 
-import { SEO } from '../components/SEO';
-import { PaymentForm } from '../components/common/PaymentForm';
+import { SEO } from '../../components/SEO';
+import { PaymentForm } from '../../components/common/PaymentForm';
 
-export default function DonatePage() {
+export default function PaymentPage() {
   return (
     <>
       <SEO title="Pay to Coderplex Technologies" />

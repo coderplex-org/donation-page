@@ -31,9 +31,9 @@ export const HomeContent = () => {
         </Button>
       </div>
       <div className="p-4 flex justify-center">
-        <Button href="/pay">
+        <Button href="/space/pay">
           <EmojiIcon />
-          <span className="inline-block ml-2">Make A Payment</span>
+          <span className="inline-block ml-2">Pay for Hackerspace</span>
         </Button>
       </div>
     </div>
