@@ -6,6 +6,8 @@ interface RzpData {
   name: string;
   email: string;
   hours_spent: number;
+  hours_spent_cost: number;
+  tip: number;
   amount: number;
   phone: string;
   campaign?: string;
@@ -62,7 +64,7 @@ export async function openRzp(data: RzpData) {
               razorpay_order_id: order.id,
               status: 'failed',
               campaign: data.campaign,
-              isPayment: data.isPayment
+              isPayment: data.isPayment,
             });
             reject(new Error(`Payment widget is closed without completing payment. Please try again!`));
           },
