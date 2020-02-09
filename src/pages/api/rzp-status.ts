@@ -1,7 +1,14 @@
 import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { donationsBase, Views, fundingsBase, campaignsBase, PaymentStatus } from '../../services/airtable';
+import {
+  donationsBase,
+  paymentsBase,
+  Views,
+  fundingsBase,
+  campaignsBase,
+  PaymentStatus
+} from '../../services/airtable';
 
 const RZP_SECRET = process.env.NODE_ENV === 'development' ? process.env.RZP_TEST_SECRET : process.env.RZP_LIVE_SECRET;
 
@@ -31,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-async function updateStateInAirtable({ razorpay_order_id, razorpay_payment_id, status, campaign }) {
+async function updateStateInAirtable({ razorpay_order_id, razorpay_payment_id, status, campaign, isPayment }) {
   const query = {
     filterByFormula: `{order_id} = "${razorpay_order_id}"`,
     view: Views.grid,
@@ -70,10 +77,26 @@ async function updateStateInAirtable({ razorpay_order_id, razorpay_payment_id, s
         donations_count: result.fields.donations_count + 1,
       }),
     ]);
+  } else if(isPayment) {
+    return updatePaymentBase({ razorpay_order_id, ...data })
   }
 
   return updateDonationBase({ razorpay_order_id, ...data });
 }
+
+async function updatePaymentBase({ razorpay_order_id, status, payment_id = '' }) {
+  const [record] = await paymentsBase
+    .select({
+      filterByFormula: `{order_id} = "${razorpay_order_id}"`,
+      view: Views.grid,
+    })
+    .firstPage();
+  if (!record.id) {
+    return;
+  }
+  return paymentsBase.update(record.id, { status, payment_id });
+}
+
 
 async function updateDonationBase({ razorpay_order_id, status, payment_id = '' }) {
   const [record] = await donationsBase

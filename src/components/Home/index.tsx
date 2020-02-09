@@ -30,6 +30,12 @@ export const HomeContent = () => {
           <span className="inline-block ml-2">Make A Donation</span>
         </Button>
       </div>
+      <div className="p-4 flex justify-center">
+        <Button href="/pay">
+          <EmojiIcon />
+          <span className="inline-block ml-2">Make A Payment</span>
+        </Button>
+      </div>
     </div>
   );
 };

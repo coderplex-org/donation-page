@@ -12,9 +12,10 @@ import clsx from 'clsx';
 interface Props {
   campaign?: CampaignWithFundings;
   inlineForm?: boolean;
+  isPayment?: boolean;
 }
 
-export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = false }) => {
+export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = false, isPayment = false }) => {
   const maxAmount = campaign ? campaign.required_amount : Number.MAX_SAFE_INTEGER;
   const amount = 100 > maxAmount ? maxAmount : 100;
   const initialState = { amount, email: '', phone: '', name: '' };
@@ -76,6 +77,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
         ...form,
         amount: Number(form.amount),
         campaign: campaign ? campaign.slug : undefined,
+        isPayment
       });
       setIsSubmitting(false);
       setFormValue(initialState);
@@ -163,7 +165,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
         <div className="flex justify-center mb-3">
           <Button type="submit" isLoading={isSubmitting} disabled={isSubmitting}>
             <IconCards width={27} height={22} />
-            <span className="ml-4 inline-block font-bold">Contribute ₹ {finalAmount.toFixed(2)}</span>
+            <span className="ml-4 inline-block font-bold">{ isPayment ? 'Pay' : 'Contribute' } ₹ {finalAmount.toFixed(2)}</span>
           </Button>
         </div>
         <p className="text-xs text-gray-600 text-center">
@@ -180,7 +182,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
           <PaymentSuccess />
         </div>
         <p className="text-center py-1 font-semibold text-xl text-pink-600">
-          Thanks for your {campaign ? 'contribution' : 'donation'}.
+          Thanks for your {campaign ? 'contribution' :  isPayment ? 'payment' : 'donation'}.
         </p>
         <p className="text-center text-sm text-gray-600">We truly appreciate your generosity :D</p>
       </Modal>

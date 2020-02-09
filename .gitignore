@@ -90,3 +90,9 @@ typings/
 
 # package-lock
 package-lock.json
+
+# Now
+.now
+
+# Editor
+.idea
