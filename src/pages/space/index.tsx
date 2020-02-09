@@ -8,7 +8,7 @@ import { PaymentForm } from '../../components/common/PaymentForm';
 export default function PaymentPage() {
   return (
     <>
-      <SEO title="Pay to Coderplex Technologies" />
+      <SEO title="Pay to Coderplex Hackerspace" />
       <div className="pb-20 md:pb-0 md:max-w-3xl mx-auto">
         <header>
           <Link href="/">

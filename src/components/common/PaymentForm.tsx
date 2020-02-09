@@ -136,7 +136,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
   return (
     <div className={clsx(!inlineForm && 'px-4', inlineForm && 'md:px-0')}>
       <p className="text-lg mb-4 text-gray-700 leading-relaxed">
-        {isPayment ? 'Please make payment for hackerspace here' : 'We truly appreciate your generosity'}
+        {isPayment ? 'Please make your Hackerspace payment here' : 'We truly appreciate your generosity'}
       </p>
       <form name="payment" onSubmit={onSubmit}>
         {isPayment && (

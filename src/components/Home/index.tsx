@@ -31,7 +31,7 @@ export const HomeContent = () => {
         </Button>
       </div>
       <div className="p-4 flex justify-center">
-        <Button href="/space/pay">
+        <Button href="/space">
           <EmojiIcon />
           <span className="inline-block ml-2">Pay for Hackerspace</span>
         </Button>
