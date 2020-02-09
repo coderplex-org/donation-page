@@ -38,6 +38,7 @@ export interface Donation extends RZPPayment {
 
 export interface Payment extends RZPPayment {
   paid_amount: number;
+  hours_spent: number;
 }
 
 export interface Funding extends Donation {

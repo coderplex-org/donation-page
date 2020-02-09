@@ -58,6 +58,9 @@ async function updateStateInAirtable({ razorpay_order_id, razorpay_payment_id, s
       .firstPage();
 
     if (!result) {
+      if (isPayment) {
+        return updatePaymentBase({ razorpay_order_id, ...data });
+      }
       return updateDonationBase({ razorpay_order_id, ...data });
     }
 

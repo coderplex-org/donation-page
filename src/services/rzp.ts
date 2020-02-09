@@ -5,6 +5,7 @@ import { getFinalAmount } from '../utils';
 interface RzpData {
   name: string;
   email: string;
+  hours_spent: number;
   amount: number;
   phone: string;
   campaign?: string;

@@ -18,7 +18,7 @@ const razorpay = new Razorpay(rzpCredentials);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { email, name, amount, phone, paymentMethod = 'Razorpay', campaign, isPayment } = req.body;
+    const { email, name, amount, hours_spent, phone, paymentMethod = 'Razorpay', campaign, isPayment } = req.body;
     const id = cuid();
     const data: { id: string; status: PaymentStatus } = await razorpay.orders.create({
       amount: getFinalAmount(Number(amount)) * 100, // in paise
@@ -56,6 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           name,
           email,
           phone,
+          hours_spent: Number(hours_spent),
           paid_amount: Number(amount),
           payment_method: paymentMethod,
           status: PaymentStatus.created,

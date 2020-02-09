@@ -17,8 +17,9 @@ interface Props {
 
 export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = false, isPayment = false }) => {
   const maxAmount = campaign ? campaign.required_amount : Number.MAX_SAFE_INTEGER;
+  const hours_spent = 2;
   const amount = 100 > maxAmount ? maxAmount : 100;
-  const initialState = { amount, email: '', phone: '', name: '' };
+  const initialState = { amount, hours_spent, email: '', phone: '', name: '' };
   const [form, setFormValue] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isModalOpen, toggleModal] = useState(false);
@@ -26,6 +27,15 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
   function onChange(e: ChangeEvent<HTMLInputElement>) {
     e.persist();
     const value = e.target.value;
+    if (e.target.name === 'hours_spent') {
+      const hours_spent = Number(value);
+      const cost = hours_spent > 3 ? hours_spent * 30 : hours_spent * 50;
+      return setFormValue(form => ({
+        ...form,
+        [e.target.name]: value,
+        'amount': cost < Number(maxAmount) ? cost : maxAmount,
+      }));
+    }
     if (e.target.name === 'amount') {
       return setFormValue(form => ({
         ...form,
@@ -35,8 +45,8 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
     setFormValue(form => ({ ...form, [e.target.name]: value }));
   }
 
-  function validateForm(form: { name: string; email: string; phone: string; amount: number }) {
-    if (!form.amount || !form.email || !form.phone || !form.name) {
+  function validateForm(form: { name: string; email: string; phone: string; amount: number, hours_spent: number }) {
+    if (!form.amount || !form.email || !form.phone || !form.name || !form.hours_spent) {
       return alert(`Please enter all required fields`);
     }
 
@@ -53,6 +63,10 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
 
     if (!/^(?:(?:\+|0{0,2})91(\s*[-]\s*)?|[0]?)?[6789]\d{9}$/.test(form.phone)) {
       return `Enter a valid phone number`;
+    }
+
+    if (Number(form.hours_spent) < 1) {
+      return alert(`Hours spent should be greater than or equal to 1`);
     }
 
     if (Number(form.amount) < 1) {
@@ -75,6 +89,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
       setIsSubmitting(true);
       await openRzp({
         ...form,
+        hours_spent: Number(form.hours_spent),
         amount: Number(form.amount),
         campaign: campaign ? campaign.slug : undefined,
         isPayment
@@ -90,8 +105,27 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
 
   return (
     <div className={clsx(!inlineForm && 'px-4', inlineForm && 'md:px-0')}>
-      <p className="text-lg mb-4 text-gray-700 leading-relaxed">We truly appreciate your generosity</p>
+      <p className="text-lg mb-4 text-gray-700 leading-relaxed">{ isPayment ? 'Please make payment for hackerspace here' : 'We truly appreciate your generosity' }</p>
       <form name="payment" onSubmit={onSubmit}>
+        <div className="mb-4 mt-4">
+          <label htmlFor="amount" className="text-sm text-gray-800 mb-1 block">
+            Hours spent <sup className="text-red-500">*</sup>
+          </label>
+          <div>
+            <input
+              className="bg-white focus:outline-0 border border-gray-300 rounded py-2 px-2 block w-full appearance-none leading-normal"
+              type="number"
+              name="hours_spent"
+              id="hours_spent"
+              value={form.hours_spent}
+              onChange={onChange}
+              required
+              autoFocus={!inlineForm}
+              min="1"
+              disabled={isSubmitting}
+            />
+          </div>
+        </div>
         <div className="mb-4 mt-4">
           <label htmlFor="amount" className="text-sm text-gray-800 mb-1 block">
             Amount <sup className="text-red-500">*</sup>
@@ -107,7 +141,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
               required
               autoFocus={!inlineForm}
               min="1"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isPayment}
             />
           </div>
         </div>
