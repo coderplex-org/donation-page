@@ -56,7 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           payment_method: paymentMethod,
           status: PaymentStatus.created,
           order_id: data.id,
-          created_at: Date.now(),
+          created_at: new Date().toISOString(),
         },
         { typecast: true }
       );
@@ -89,7 +89,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           payment_method: paymentMethod,
           status: PaymentStatus.created,
           order_id: data.id,
-          created_at: Date.now(),
+          created_at: new Date().toISOString(),
         },
         { typecast: true }
       );
