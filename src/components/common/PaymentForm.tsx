@@ -174,7 +174,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
                 value={form.tip}
                 onChange={onChange}
                 required
-                min="1"
+                min="0"
                 disabled={isSubmitting}
               />
             </div>
