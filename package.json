@@ -12,11 +12,11 @@
   "homepage": "https://github.com/coderplex/donation-page#readme",
   "main": "src/pages/index.ts",
   "engines": {
-    "node": "v10.x"
+    "node": "v12.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "now dev",
+    "dev": "next",
     "add-contributor": "all-contributors add",
     "format": "prettier --write './**/*.+(ts|tsx|css|json|js|jsx|json|md)'"
   },
@@ -24,9 +24,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@types/airtable": "^0.5.6",
+    "@types/airtable": "^0.8.0",
     "@zeit/next-css": "0.2.1-canary.4",
-    "airtable": "^0.7.0",
+    "airtable": "^0.8.1",
     "clsx": "^1.0.4",
     "copee": "^1.0.6",
     "cuid": "^2.1.6",
@@ -34,10 +34,10 @@
     "is-mobile": "^2.0.1",
     "isomorphic-unfetch": "^3.0.0",
     "md.js": "^0.2.6",
-    "next": "^9.1.4",
+    "next": "^9.4.4",
     "nprogress": "^0.2.0",
     "qrcode.react": "^0.9.3",
-    "razorpay": "^2.0.4",
+    "razorpay": "^2.0.6",
     "react": "^16.8.6",
     "react-div-100vh": "^0.3.4",
     "react-dom": "^16.8.6",

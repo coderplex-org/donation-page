@@ -96,3 +96,8 @@ package-lock.json
 
 # Editor
 .idea
+
+.vercel
+
+rzp.*
+.env.*
