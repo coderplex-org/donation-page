@@ -50,6 +50,7 @@ export const DonorsList: FunctionComponent<Props> = ({ campaign }) => {
                     <p className="text-xs text-gray-600">
                       {fromnow(new Date(item.created_at), { max: 2, suffix: true })}
                     </p>
+                    <p className="text-xs text-gray-600">{item.message}</p>
                   </div>
                   <div className="px-4">
                     <span className="inline-block bg-green-600 text-xs rounded-full px-3 py-1 text-white">

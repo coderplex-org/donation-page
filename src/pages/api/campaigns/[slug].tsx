@@ -20,16 +20,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .select({ view: Views.grid, sort: [{ field: 'created_at', direction: 'desc' }] })
       .firstPage();
     const fundings = fundingResults
-      .map(({ fields: { name, donated_amount, created_at, campaign, status }, id }) => ({
+      .map(({ fields: { name, donated_amount, created_at, campaign, status, message }, id }) => ({
         name,
         donated_amount,
         created_at,
         campaign,
         status,
         id,
+        message,
       }))
       .filter(({ campaign, status }) => campaign === _slug && status === PaymentStatus.captured);
-
     res.send({ ...campaign, fundings });
   } catch (error) {
     console.log(error);

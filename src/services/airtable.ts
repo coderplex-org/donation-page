@@ -25,6 +25,7 @@ export interface RZPPayment {
   name: string;
   email: string;
   phone: string;
+  message: string;
   payment_method: string;
   created_at: string;
   order_id: string;

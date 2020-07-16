@@ -23,6 +23,7 @@ interface FormState {
   email: string;
   phone: string;
   name: string;
+  message: string;
 }
 
 export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = false, isPayment = false }) => {
@@ -36,6 +37,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
     email: '',
     phone: '',
     name: '',
+    message: '',
   };
   const [form, setFormValue] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -246,6 +248,22 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
               value={form.phone}
               onChange={onChange}
               required
+              disabled={isSubmitting}
+            />
+          </div>
+        </div>
+        <div className="mb-6">
+          <label className="text-sm text-gray-800 mb-1 block" htmlFor="message">
+            Message
+          </label>
+          <div>
+            <input
+              className="bg-white focus:outline-0 border border-gray-300 rounded py-2 px-2 block w-full appearance-none leading-normal"
+              type="text"
+              name="message"
+              id="message"
+              value={form.message}
+              onChange={onChange}
               disabled={isSubmitting}
             />
           </div>
