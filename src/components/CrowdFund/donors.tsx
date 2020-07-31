@@ -36,8 +36,9 @@ export const DonorsList: FunctionComponent<Props> = ({ campaign }) => {
                 <li
                   style={{
                     ...style,
+                    position: 'static',
                     top: Number(style.top) + GUTTER_SIZE / 2,
-                    height: Number(style.height) - GUTTER_SIZE,
+                    height: 'unset',
                   }}
                   className="flex items-center bg-white shadow my-4 py-2 rounded-lg">
                   <div className="px-4">
