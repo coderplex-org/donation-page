@@ -23,7 +23,7 @@ export const CampaignList: FunctionComponent<Props> = ({ inline = false }) => {
   if (error) {
     return (
       <div className="mx-0 my-4 md:mx-4 md:h-64">
-        <h3 className="text-lg md:text-xl mb-1 text-red-700">{error.message || 'An error occured. Try again later'}</h3>
+        <h3 className="text-lg md:text-xl mb-1 text-red-700">{'An error occured. Try again later'}</h3>
       </div>
     );
   }
