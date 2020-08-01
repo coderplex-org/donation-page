@@ -1,17 +1,13 @@
 import React, { FunctionComponent } from 'react';
 import fromnow from 'fromnow';
-import { FixedSizeList as List } from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
 
-import { AwardIcon } from '../../components/Icons/common';
+import { AwardIcon } from '../Icons/common';
 import { CampaignWithFundings } from '../../services/airtable';
 import { truncateString } from '../../utils';
 
 interface Props {
   campaign: CampaignWithFundings;
 }
-
-const GUTTER_SIZE = 16;
 
 export const DonorsList: FunctionComponent<Props> = ({ campaign }) => {
   const { fundings } = campaign;
@@ -26,44 +22,26 @@ export const DonorsList: FunctionComponent<Props> = ({ campaign }) => {
     );
   }
   return (
-    <ul className="w-full" style={{ height: 500 }}>
-      <AutoSizer>
-        {({ width, height }) => (
-          <List height={height} itemCount={fundings.length} itemSize={70} width={width}>
-            {({ index, style }) => {
-              const item = fundings[index];
-              return (
-                <li
-                  style={{
-                    ...style,
-                    position: 'static',
-                    top: Number(style.top) + GUTTER_SIZE / 2,
-                    height: 'unset',
-                  }}
-                  className="flex items-center bg-white shadow my-4 py-2 rounded-lg">
-                  <div className="px-4">
-                    <AwardIcon />
-                  </div>
-                  <div className="flex-1">
-                    <h6 className="font-medium text-gray-800" title={item.name}>
-                      {truncateString(item.name, 15)}
-                    </h6>
-                    <p className="text-xs text-gray-600">
-                      {fromnow(new Date(item.created_at), { max: 2, suffix: true })}
-                    </p>
-                    <p className="text-xs text-gray-600">{item.message}</p>
-                  </div>
-                  <div className="px-4">
-                    <span className="inline-block bg-green-600 text-xs rounded-full px-3 py-1 text-white">
-                      ₹ {item.donated_amount}
-                    </span>
-                  </div>
-                </li>
-              );
-            }}
-          </List>
-        )}
-      </AutoSizer>
+    <ul className="w-full overflow-y-scroll" style={{ height: 500 }}>
+      {fundings.map(item => (
+        <li key={item.id} className="flex items-center bg-white shadow my-4 py-2 rounded-lg">
+          <div className="px-4">
+            <AwardIcon />
+          </div>
+          <div className="flex-1">
+            <h6 className="font-medium text-gray-800" title={item.name}>
+              {truncateString(item.name, 15)}
+            </h6>
+            <p className="text-xs text-gray-600">{fromnow(new Date(item.created_at), { max: 2, suffix: true })}</p>
+            <p className="text-xs text-gray-600">{item.message}</p>
+          </div>
+          <div className="px-4">
+            <span className="inline-block bg-green-600 text-xs rounded-full px-3 py-1 text-white">
+              ₹ {item.donated_amount}
+            </span>
+          </div>
+        </li>
+      ))}
     </ul>
   );
 };
