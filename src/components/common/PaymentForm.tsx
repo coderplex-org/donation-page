@@ -265,6 +265,7 @@ export const PaymentForm: FunctionComponent<Props> = ({ campaign, inlineForm = f
               value={form.message}
               onChange={onChange}
               disabled={isSubmitting}
+              maxLength={100}
             />
           </div>
         </div>
