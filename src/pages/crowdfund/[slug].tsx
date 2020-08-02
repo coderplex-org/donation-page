@@ -49,7 +49,7 @@ const CampaignPage: NextPage = ({ initialData, slug }) => {
             )}
           </div>
 
-          <div className="mt-10 md:mt-0 md:mx-2 md:w-1/3 md:bg-white md:p-4 md:shadow md:rounded-lg">
+          <div className="mt-10 flex flex-col overflow-y-hidden max-h-screen md:-mt-12 md:mx-2 md:w-1/3 md:bg-white md:p-4 md:shadow md:rounded-lg">
             <DonorsList campaign={data} />
           </div>
         </div>

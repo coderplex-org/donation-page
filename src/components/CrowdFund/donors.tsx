@@ -42,7 +42,7 @@ export const DonorsList: FunctionComponent<Props> = ({ campaign }) => {
           <a className={showRecent ? tabClass : tabActiveClass}>Top Contributions</a>
         </li>
       </ul>
-      <ul className="w-full overflow-y-scroll" style={{ height: 500 }}>
+      <ul className="w-full overflow-y-scroll">
         {sortedFundings().map(item => (
           <li key={item.id} className="flex items-center bg-white shadow my-4 py-2 rounded-lg">
             <div className="px-4 text-center">
